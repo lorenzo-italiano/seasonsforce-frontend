@@ -1,5 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
+import Test from "./src/Test";
+import { NativeWindStyleSheet } from "nativewind";
+
+NativeWindStyleSheet.setOutput({
+    default: "native",
+});
+
 
 export default function App() {
     return (
@@ -7,16 +14,8 @@ export default function App() {
             <Text className="text-blue-400 text-md font-bold mt-2">
                 Open up App.js to start working on your app!
             </Text>
+            <Test></Test>
             <StatusBar style="auto" />
         </View>
     );
 }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });
