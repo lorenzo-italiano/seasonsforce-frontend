@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Text, FlatList, SafeAreaView} from "react-native";
-import useFetchRecruiterList from "./rest/hook/useFetchRecruiterList";
+import useFetchRecruiterList from "../rest/hook/useFetchRecruiterList";
 
 const RecruiterList = () => {
 
