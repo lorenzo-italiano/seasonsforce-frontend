@@ -1,6 +1,6 @@
 import {SafeAreaView, Text} from "react-native";
 import Test from "../Test";
-import RecruiterList from "../RecruiterList";
+import RecruiterList from "../component/RecruiterList";
 import {StatusBar} from "expo-status-bar";
 import useFetchRecruiterList from "../rest/hook/useFetchRecruiterList";
 import React from "react";
