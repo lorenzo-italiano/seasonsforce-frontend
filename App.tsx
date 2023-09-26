@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import {SafeAreaView, Text} from 'react-native';
 import Test from "./src/Test";
 import { NativeWindStyleSheet } from "nativewind";
-import RecruiterList from "./src/RecruiterList";
+import RecruiterList from "./src/component/RecruiterList";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import {NavigationContainer, StackRouter} from "@react-navigation/native";
 import {ScreenStack} from "react-native-screens";
