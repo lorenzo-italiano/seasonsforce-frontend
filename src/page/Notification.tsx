@@ -11,13 +11,8 @@ const Notification = () => {
     // const recruiterList = useFetchRecruiterList()
 
     return(
-        <SafeAreaView className="flex-1 items-center justify-center bg-white">
-            <Text className="text-blue-400 text-md font-bold mt-2">
-                geosgioseioefsgjoiefsjiosefjio
-            </Text>
-
+        <SafeAreaView className="flex-1 w-screen h-screen items-center justify-center bg-white">
             <NotificationList />
-
         </SafeAreaView>
     )
 }
