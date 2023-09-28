@@ -1,22 +1,15 @@
-import { StatusBar } from 'expo-status-bar';
-import {SafeAreaView, Text} from 'react-native';
-import Test from "./src/Test";
 import { NativeWindStyleSheet } from "nativewind";
-import RecruiterList from "./src/component/RecruiterList";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
-import {NavigationContainer, StackRouter} from "@react-navigation/native";
-import {ScreenStack} from "react-native-screens";
-import Home from "./src/page/Home";
-import Notification from "./src/page/Notification";
-import { createStackNavigator } from '@react-navigation/stack';
+import {NavigationContainer} from "@react-navigation/native";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Conversation from "./src/page/Conversation";
-import Jobs from "./src/page/Jobs";
-import Profile from "./src/page/Profile";
-
+import Conversation from "@screen/Conversation";
+import Jobs from "@screen/Jobs";
+import Profile from "@screen/Profile";
+import Notification from "@screen/Notification";
+import Home from "@screen/Home";
 
 NativeWindStyleSheet.setOutput({
     default: "native",
