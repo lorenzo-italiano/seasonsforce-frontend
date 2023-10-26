@@ -1,13 +1,32 @@
-import {View, Text, TextInput, Button, SafeAreaView, Image, Modal, Alert, Pressable} from 'react-native';
+import {
+	View,
+	Text,
+	TextInput,
+	Button,
+	SafeAreaView,
+	Image,
+	Modal,
+	Alert,
+	Pressable,
+	TouchableOpacity
+} from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import axios from "axios";
 import {getToken, storeToken} from "../auth/Auth";
 import Logo from "../../assets/logo.png"
 import {useState} from "react";
+import {useNavigation} from "@react-navigation/native";
 
 function Login({ onLogin }) {
 	const { control, handleSubmit, formState: { errors }, setError } = useForm();
 	// const [modalVisible, setModalVisible] = useState(false);
+
+	const navigation = useNavigation();
+
+	const handleNavigateToRegister = () => {
+		// Utilisez la fonction navigation.navigate pour naviguer vers la page d'inscription (Register)
+		navigation.navigate('Register');
+	}
 
 	const onSubmit = async (data) => {
 		try {
@@ -56,7 +75,7 @@ function Login({ onLogin }) {
 	};
 
 	return (
-		<SafeAreaView className="flex flex-col w-full items-center justify-center h-screen">
+		<SafeAreaView className="flex-col justify-center items-center w-full h-full">
 
 			{/*<Modal*/}
 			{/*	// animationType="slide"*/}
@@ -77,13 +96,12 @@ function Login({ onLogin }) {
 			{/*	</SafeAreaView>*/}
 			{/*</Modal>*/}
 
-			<View className="flex w-1/2 items-center justify-center gap-5">
-				<Image source={Logo} className="w-40 h-40" />
-				<Text className="text-lg font-bold mb-2 text-center text-4xl">Connexion</Text>
-			</View>
+				<View className="flex-col items-center mb-10">
+					<Image source={Logo} className="w-40 h-40" />
+					<Text className="text-4xl font-bold">Connexion</Text>
+				</View>
 
-			<View className="flex gap-y-2 w-2/3">
-				<View>
+				<View className="flex-col w-2/5">
 					<Text className="font-bold text-lg">Email</Text>
 					<Controller
 						defaultValue=""
@@ -101,9 +119,8 @@ function Login({ onLogin }) {
 						rules={{ required: "l'email est requis" }}
 					/>
 					{errors.email && <Text className="text-red-800 font-bold">{errors.email.message}</Text>}
-				</View>
 
-				<View className="mb-10">
+
 					<Text className="font-bold text-lg">Mot de passe</Text>
 					<Controller
 						defaultValue=""
@@ -123,9 +140,19 @@ function Login({ onLogin }) {
 					{errors.password && <Text className="text-red-800 font-bold">{errors.password.message}</Text>}
 				</View>
 
-				<Button title="Se connecter" onPress={handleSubmit(onSubmit)} />
-				<Text className="text-sm mt-2 text-blue-500">Forgot Password?</Text>
-			</View>
+				<View>
+					<Pressable className="mb-5" onPress={handleNavigateToRegister}>
+						<Text className="text-sm text-blue-500">Pas de compte ? Inscrivez vous !</Text>
+					</Pressable>
+
+					{/*<Button title="Se connecter" onPress={handleSubmit(onSubmit)} />*/}
+					<TouchableOpacity className="border-b-blue-700 rounded-lg bg-blue-700 p-2" onPress={handleSubmit(onSubmit)}>
+						<Text className="text-center text-white font-bold text-xl" >Se connecter</Text>
+					</TouchableOpacity>
+
+					<Text className="text-sm mt-2 text-blue-500">Mot de passe oublié ?</Text>
+				</View>
+
 		</SafeAreaView>
 	)
 }
