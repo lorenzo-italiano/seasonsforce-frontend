@@ -33,35 +33,36 @@ function Login({ onLogin }) {
 			// Configuration de l'en-tête pour le type x-www-form-urlencoded
 			const config = {
 				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded',
+					'Content-Type': 'application/json',
 					'Accept': 'application/json',
 				},
 			};
 
 			let details = {
-				'grant_type': 'password',
-				'client_id': 'seasonsforce-client',
+				// 'grant_type': 'password',
+				// 'client_id': 'seasonsforce-client',
 				'username': data.email,
 				'password': data.password,
 			};
 
-			let formBody: [string] = [];
-			for (let property in details) {
-				let encodedKey = encodeURIComponent(property);
-				let encodedValue = encodeURIComponent(details[property]);
-				formBody.push(encodedKey + "=" + encodedValue);
-			}
-			let formBodyString : string = formBody.join("&");
+			// let formBody: [string] = [];
+			// for (let property in details) {
+			// 	let encodedKey = encodeURIComponent(property);
+			// 	let encodedValue = encodeURIComponent(details[property]);
+			// 	formBody.push(encodedKey + "=" + encodedValue);
+			// }
+			// let formBodyString : string = formBody.join("&");
 
 			// URL de l'endpoint POST
 			const url = 'http://localhost:8090/api/v1/user/auth/login';
 
 			try {
 				// Effectuer la requête POST
-				const response = await axios.post(url, formBodyString, config);
-				await storeToken(JSON.parse(response.data + "\"}").access_token)
+				const response = await axios.post(url, details, config);
+				await storeToken(response.data.access_token)
 				onLogin()
 			} catch (error) {
+				console.log(error)
 				setError('password', {
 					type: 'manual',
 					message: 'Mot de passe ou Email incorrect !',

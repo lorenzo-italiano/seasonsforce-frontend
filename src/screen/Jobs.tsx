@@ -1,7 +1,10 @@
 import {SafeAreaView, Text} from "react-native";
 import React from "react";
+import useFetchOfferList from "../rest/hook/useFetchOfferList";
 
 const Jobs = () => {
+
+	const offerList = useFetchOfferList()
 
 
     return(
