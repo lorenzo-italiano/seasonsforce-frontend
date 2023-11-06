@@ -1,11 +1,8 @@
 import axios from "axios";
-import {getToken} from "../../auth/Auth";
 
-export const getAll = async (endpointUrl: String) => {
+export async function getAll(endpointUrl: String, getValidToken: () => Promise<string>) {
 
-	// console.log("here")
-
-	let token: String = "Bearer " + await getToken()
+	let token: String = "Bearer " + await getValidToken()
 	//
 	console.log(token)
 	//
@@ -15,11 +12,8 @@ export const getAll = async (endpointUrl: String) => {
 		}
 	}
 
-	console.log("here")
-
     const res = await axios.get(endpointUrl, config);
 
-	console.log("there")
     console.log(res.data)
     return res.data;
 }

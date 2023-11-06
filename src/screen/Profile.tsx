@@ -1,14 +1,17 @@
 import {Button, SafeAreaView, Text} from "react-native";
-import React from "react";
+import React, {useContext} from "react";
 import {logout} from "../auth/Auth";
+import {AuthContext} from "../context/AuthContext";
 
-const Profile = ({ onLogout }) => {
+const Profile = () => {
 
-	const handleLogout = async () => {
-		await logout()
+	const { logout } = useContext(AuthContext)
 
-		onLogout()
-	}
+	// const handleLogout = async () => {
+	// 	await logout()
+	//
+	// 	onLogout()
+	// }
 
 
     return(
@@ -17,7 +20,7 @@ const Profile = ({ onLogout }) => {
                 Profile
             </Text>
 
-			<Button title="dicconnect" onPress={handleLogout} />
+			<Button title="dicconnect" onPress={logout} />
 
         </SafeAreaView>
     )

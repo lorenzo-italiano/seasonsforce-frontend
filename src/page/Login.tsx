@@ -12,13 +12,15 @@ import {
 } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import axios from "axios";
-import {getToken, storeToken} from "../auth/Auth";
+// import {getToken, storeRefreshToken, storeToken} from "../auth/Auth";
 import Logo from "../../assets/logo.png"
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {useNavigation} from "@react-navigation/native";
+import {AuthContext} from "../context/AuthContext";
 
-function Login({ onLogin }) {
+function Login() {
 	const { control, handleSubmit, formState: { errors }, setError } = useForm();
+	const { setUserToken, setRefreshToken } = useContext(AuthContext)
 	// const [modalVisible, setModalVisible] = useState(false);
 
 	const navigation = useNavigation();
@@ -59,8 +61,8 @@ function Login({ onLogin }) {
 			try {
 				// Effectuer la requête POST
 				const response = await axios.post(url, details, config);
-				await storeToken(response.data.access_token)
-				onLogin()
+				await setUserToken(response.data.access_token)
+				await setRefreshToken(response.data.refresh_token)
 			} catch (error) {
 				console.log(error)
 				setError('password', {
