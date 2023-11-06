@@ -12,7 +12,6 @@ const Notification = () => {
 
     return(
         <SafeAreaView className="flex-1 w-screen h-screen items-center justify-center bg-white">
-            <NotificationList />
         </SafeAreaView>
     )
 }

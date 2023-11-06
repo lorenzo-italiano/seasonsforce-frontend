@@ -7,7 +7,7 @@ import React from "react";
 
 const Home = () => {
 
-    const recruiterList = useFetchRecruiterList()
+    // const recruiterList = useFetchRecruiterList()
 
     return(
         <SafeAreaView className="flex-1 items-center justify-center bg-white">
@@ -16,7 +16,6 @@ const Home = () => {
             </Text>
             <Test></Test>
 
-            <RecruiterList />
             <StatusBar style="auto" />
         </SafeAreaView>
     )

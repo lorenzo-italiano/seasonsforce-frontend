@@ -12,13 +12,15 @@ import {
 } from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import axios from "axios";
-import {getToken, storeToken} from "../auth/Auth";
+// import {getToken, storeRefreshToken, storeToken} from "../auth/Auth";
 import Logo from "../../assets/logo.png"
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {useNavigation} from "@react-navigation/native";
+import {AuthContext} from "../context/AuthContext";
 
-function Login({ onLogin }) {
+function Login() {
 	const { control, handleSubmit, formState: { errors }, setError } = useForm();
+	const { setUserToken, setRefreshToken } = useContext(AuthContext)
 	// const [modalVisible, setModalVisible] = useState(false);
 
 	const navigation = useNavigation();
@@ -33,35 +35,36 @@ function Login({ onLogin }) {
 			// Configuration de l'en-tête pour le type x-www-form-urlencoded
 			const config = {
 				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded',
+					'Content-Type': 'application/json',
 					'Accept': 'application/json',
 				},
 			};
 
 			let details = {
-				'grant_type': 'password',
-				'client_id': 'seasonsforce-client',
+				// 'grant_type': 'password',
+				// 'client_id': 'seasonsforce-client',
 				'username': data.email,
 				'password': data.password,
 			};
 
-			let formBody: [string] = [];
-			for (let property in details) {
-				let encodedKey = encodeURIComponent(property);
-				let encodedValue = encodeURIComponent(details[property]);
-				formBody.push(encodedKey + "=" + encodedValue);
-			}
-			let formBodyString : string = formBody.join("&");
+			// let formBody: [string] = [];
+			// for (let property in details) {
+			// 	let encodedKey = encodeURIComponent(property);
+			// 	let encodedValue = encodeURIComponent(details[property]);
+			// 	formBody.push(encodedKey + "=" + encodedValue);
+			// }
+			// let formBodyString : string = formBody.join("&");
 
 			// URL de l'endpoint POST
 			const url = 'http://localhost:8090/api/v1/user/auth/login';
 
 			try {
 				// Effectuer la requête POST
-				const response = await axios.post(url, formBodyString, config);
-				await storeToken(JSON.parse(response.data + "\"}").access_token)
-				onLogin()
+				const response = await axios.post(url, details, config);
+				await setUserToken(response.data.access_token)
+				await setRefreshToken(response.data.refresh_token)
 			} catch (error) {
+				console.log(error)
 				setError('password', {
 					type: 'manual',
 					message: 'Mot de passe ou Email incorrect !',

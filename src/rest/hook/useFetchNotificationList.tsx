@@ -1,5 +1,5 @@
 import {useQuery} from "@tanstack/react-query";
-import {getAll} from "../queries/RecruiterQueries";
+import {getAll} from "../queries/QueryService";
 
 export default function useFetchNotificationList() {
     return useQuery({
