@@ -404,8 +404,8 @@ const RegisterFormCandidateStep = () => {
 					/>
 					{errors.country && <Text className="text-red-800 font-bold">{errors.country.message}</Text>}
 
-					<TouchableOpacity className="border-b-blue-700 rounded-lg bg-primary p-2 my-4" onPress={handleSubmit(onSubmit)}>
-						<Text className="text-center text-white font-bold text-xl">S'inscrire</Text>
+					<TouchableOpacity className="border-primary rounded-lg bg-primary p-2 my-4" onPress={handleSubmit(onSubmit)}>
+						<Text className="text-center text-background font-bold text-xl">S'inscrire</Text>
 					</TouchableOpacity>
 				</View>
 

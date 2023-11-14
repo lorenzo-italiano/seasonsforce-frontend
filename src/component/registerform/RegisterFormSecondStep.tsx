@@ -364,11 +364,9 @@ const RegisterFormSecondStep = forwardRef(({ onSubmitSecondStep }, ref) => {
 				/>
 				{errors.phone && <Text className="text-red-800 font-bold">{errors.phone.message}</Text>}
 
-				<View className="flex-col items-center justify-center">
-					<TouchableOpacity className="w-2/5 border-b-primary rounded-lg bg-primary p-2 mb-4" onPress={handleSubmit(onSubmitSecondStep)}>
-						<Text className="text-center text-white font-bold text-xl" >S'inscrire</Text>
-					</TouchableOpacity>
-				</View>
+				<TouchableOpacity className="w-full border-b-primary rounded-lg bg-primary p-2 mb-4" onPress={handleSubmit(onSubmitSecondStep)}>
+					<Text className="text-center text-background font-bold text-xl" >S'inscrire</Text>
+				</TouchableOpacity>
 
 			</View>
 		</View>

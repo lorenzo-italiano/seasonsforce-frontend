@@ -141,19 +141,17 @@ function Login() {
 						rules={{ required: 'Le mot de passe est requis' }}
 					/>
 					{errors.password && <Text className="text-red-800 font-bold">{errors.password.message}</Text>}
-				</View>
 
-				<View>
 					<Pressable className="mb-5" onPress={handleNavigateToRegister}>
-						<Text className="text-sm text-blue-500">Pas de compte ? Inscrivez vous !</Text>
+						<Text className="text-sm text-accent-blue">Pas de compte ? Inscrivez vous !</Text>
 					</Pressable>
 
 					{/*<Button title="Se connecter" onPress={handleSubmit(onSubmit)} />*/}
-					<TouchableOpacity className="border-b-blue-700 rounded-lg bg-blue-700 p-2" onPress={handleSubmit(onSubmit)}>
-						<Text className="text-center text-white font-bold text-xl" >Se connecter</Text>
+					<TouchableOpacity className="border-primary rounded-lg bg-primary p-2" onPress={handleSubmit(onSubmit)}>
+						<Text className="text-center text-background font-bold text-xl" >Se connecter</Text>
 					</TouchableOpacity>
 
-					<Text className="text-sm mt-2 text-blue-500">Mot de passe oublié ?</Text>
+					<Text className="text-sm mt-2 text-accent-blue">Mot de passe oublié ?</Text>
 				</View>
 
 		</SafeAreaView>

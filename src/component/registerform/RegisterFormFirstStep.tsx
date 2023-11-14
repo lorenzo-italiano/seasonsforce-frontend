@@ -105,11 +105,11 @@ const RegisterFormFirstStep = forwardRef(({ onSubmitFirstStep }, ref) => {
 
 				<View>
 					<Pressable className="mb-5" onPress={handleNavigateToLogin}>
-						<Text className="text-sm text-blue-500">Vous avez déjà un compte ? Connectez vous !</Text>
+						<Text className="text-sm text-accent-blue">Vous avez déjà un compte ? Connectez vous !</Text>
 					</Pressable>
 
-					<TouchableOpacity className="border-b-blue-700 rounded-lg bg-primary p-2" onPress={handleSubmit(onSubmitFirstStep)}>
-						<Text className="text-center text-white font-bold text-xl">Suivant</Text>
+					<TouchableOpacity className="border-primary rounded-lg bg-primary p-2" onPress={handleSubmit(onSubmitFirstStep)}>
+						<Text className="text-center text-background font-bold text-xl">Suivant</Text>
 					</TouchableOpacity>
 				</View>
 			</View>
