@@ -78,7 +78,7 @@ function Login() {
 	};
 
 	return (
-		<SafeAreaView className="flex-col justify-center items-center w-full h-full">
+		<SafeAreaView className="flex-col justify-center items-center w-full h-full bg-background">
 
 			{/*<Modal*/}
 			{/*	// animationType="slide"*/}
