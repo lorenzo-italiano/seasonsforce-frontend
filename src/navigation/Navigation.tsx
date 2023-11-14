@@ -18,6 +18,10 @@ import {AuthContext} from "../context/AuthContext";
 import Register from "../page/Register";
 import Login from "../page/Login";
 import OfferDetail from "../component/detail/OfferDetail";
+import {Pressable, Text, View} from "react-native";
+import RegisterFormRecruiterStep from "../component/registerform/specificforms/RegisterFormRecruiterStep";
+import RegisterFormCandidateStep from "../component/registerform/specificforms/RegisterFormCandidateStep";
+import RegisterSpecificStep from "../component/registerform/RegisterSpecificStep";
 
 
 const Tab = createBottomTabNavigator();
@@ -25,16 +29,37 @@ const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
 export default function Navigation() {
-	const { isUserAuthenticated } = useContext(AuthContext);
+	const { isUserAuthenticated, isRegistered, userToken, getUserRole, logout } = useContext(AuthContext);
+	const [isRegisteredVal, setIsRegisteredVal] = useState(false);
+	const [isLoading, setIsLoading] = useState<boolean>(false)
+
+	// TODO rajouter loading state
 
 	useEffect(() => {
-		console.log(isUserAuthenticated)
-	}, [isUserAuthenticated]);
+		async function checkIsRegistered() {
+			setIsLoading(true)
+			const result = await isRegistered();
+			setIsRegisteredVal(result);
+			setIsLoading(false)
+		}
 
+		checkIsRegistered();
+	}, [userToken])
+
+	if (isLoading) {
+		return (
+			<>
+				<Text>Loading</Text>
+				<Pressable onPress={logout}>
+					<Text>logout</Text>
+				</Pressable>
+			</>
+		)
+	}
 
 	return (
 		<NavigationContainer>
-			{ isUserAuthenticated ? (
+			{ isUserAuthenticated && isRegisteredVal &&
 				<Tab.Navigator
 					screenOptions={{
 						//TODO mettre une couleur de la palette
@@ -47,8 +72,8 @@ export default function Navigation() {
 						name="Home"
 						component={Home}
 						options={{
-							tabBarIcon: ({ color, size }) => (
-								<MaterialCommunityIcons name="home" color={color} size={size} />
+							tabBarIcon: ({color, size}) => (
+								<MaterialCommunityIcons name="home" color={color} size={size}/>
 							),
 						}}
 					/>
@@ -56,8 +81,8 @@ export default function Navigation() {
 						name="Messages"
 						component={Conversation}
 						options={{
-							tabBarIcon: ({ color, size }) => (
-								<MaterialCommunityIcons name="message" color={color} size={size} />
+							tabBarIcon: ({color, size}) => (
+								<MaterialCommunityIcons name="message" color={color} size={size}/>
 							),
 						}}
 					/>
@@ -65,8 +90,8 @@ export default function Navigation() {
 						name="Jobs"
 						component={Jobs}
 						options={{
-							tabBarIcon: ({ color, size }) => (
-								<MaterialIcons name="work" color={color} size={size} />
+							tabBarIcon: ({color, size}) => (
+								<MaterialIcons name="work" color={color} size={size}/>
 							),
 						}}
 					/>
@@ -82,8 +107,8 @@ export default function Navigation() {
 						name="Notifications"
 						component={Notification}
 						options={{
-							tabBarIcon: ({ color, size }) => (
-								<MaterialCommunityIcons name="bell" color={color} size={size} />
+							tabBarIcon: ({color, size}) => (
+								<MaterialCommunityIcons name="bell" color={color} size={size}/>
 							),
 						}}
 					/>
@@ -92,18 +117,26 @@ export default function Navigation() {
 						children={() => <Profile/>}
 						// initialParams={{ onLogout: handleLogout }}
 						options={{
-							tabBarIcon: ({ color, size }) => (
-								<FontAwesome name="user" color={color} size={size} />
+							tabBarIcon: ({color, size}) => (
+								<FontAwesome name="user" color={color} size={size}/>
 							),
 						}}
 					/>
 				</Tab.Navigator>
-			) : (
+			}
+
+			{ isUserAuthenticated && !isRegisteredVal &&
+				<Stack.Navigator initialRouteName="FinishRegister" screenOptions={{headerShown: false}}>
+					<Stack.Screen name="FinishRegister" component={RegisterSpecificStep} />
+				</Stack.Navigator>
+			}
+
+			{ !isUserAuthenticated &&
 				<Stack.Navigator initialRouteName="Login" screenOptions={{headerShown: false}}>
 					<Stack.Screen name="Login" children={() => <Login />} />
 					<Stack.Screen name="Register" component={Register} />
 				</Stack.Navigator>
-			)}
+			}
 		</NavigationContainer>
 	);
 }

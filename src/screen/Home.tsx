@@ -3,11 +3,24 @@ import Test from "../Test";
 import RecruiterList from "../component/RecruiterList";
 import {StatusBar} from "expo-status-bar";
 import useFetchRecruiterList from "../rest/hook/useFetchRecruiterList";
-import React from "react";
+import React, {useContext, useEffect} from "react";
+import {AuthContext} from "../context/AuthContext";
 
 const Home = () => {
 
-    // const recruiterList = useFetchRecruiterList()
+	const { getUserById, isRegistered, isUserAuthenticated, userToken } = useContext(AuthContext)
+
+	useEffect(() => {
+		async function test() {
+			console.log("is registered ? " + await isRegistered())
+			console.log("is user authenticated ? " + isUserAuthenticated)
+		}
+
+		test()
+
+	}, [])
+
+	// const recruiterList = useFetchRecruiterList()
 
     return(
         <SafeAreaView className="flex-1 items-center justify-center bg-white">

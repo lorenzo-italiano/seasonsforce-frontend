@@ -65,7 +65,7 @@ const OfferDetail = () => {
 
 					<View className="flex flex-col w-full pt-3">
 						<Text className="font-bold text-lg pb-3">Compétences requises</Text>
-						{ offer.required_skills.map((skill) => <Text>-{skill}</Text>) }
+						{ offer.required_skills.map((skill) => <Text key={skill}>-{skill}</Text>) }
 					</View>
 
 				</View>

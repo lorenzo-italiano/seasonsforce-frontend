@@ -2,16 +2,13 @@ export function formatDateToISO(dateStr: string): string | null {
 	const parts = dateStr.split('/');
 	if (parts.length === 3) {
 		const day = parseInt(parts[0], 10);
-		const month = parseInt(parts[1], 10) - 1; // Les mois commencent à 0 (0 = janvier, 1 = février, etc.)
+		const month = parseInt(parts[1], 10);
 		const year = parseInt(parts[2], 10);
 
-		const date = new Date(year, month - 1, day);
+		const isoString = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}T00:00:00.000Z`;
 
-		if (!isNaN(date.getTime())) {
-			// La date est valide
-			return date.toISOString();
-		}
+		return isoString;
 	}
 
-	return null; // Retourne null si la date n'est pas valide
+	return null;
 }

@@ -4,7 +4,7 @@ import {Controller, useForm} from "react-hook-form";
 import {Platform, Pressable, SafeAreaView, Text, TextInput, TouchableOpacity, View} from "react-native";
 
 const RegisterFormFirstStep = forwardRef(({ onSubmitFirstStep }, ref) => {
-	const { control, handleSubmit, formState: { errors }, setError } = useForm();
+	const { control, handleSubmit, formState: { errors }, setError, setValue } = useForm();
 
 	const navigation = useNavigation();
 
@@ -14,12 +14,16 @@ const RegisterFormFirstStep = forwardRef(({ onSubmitFirstStep }, ref) => {
 	}
 
 	React.useImperativeHandle(ref, () => ({
-		setError,
+		setError
 	}));
 
 	return (
 		<View className="flex-col items-center justify-center w-screen bg-background">
 			<View className={`flex-col ${Platform.OS === "web" ? "w-2/5" : "w-5/6"}`}>
+
+				<View className="w-full h-2 border rounded-lg border-primary my-4">
+					<View className="w-1/3 h-full rounded-lg bg-primary" />
+				</View>
 
 				<Text className="font-bold text-lg">Email</Text>
 				<Controller
