@@ -4,7 +4,7 @@ import useFetchOfferList from "../rest/hook/useFetchOfferList";
 import {AuthContext} from "../context/AuthContext";
 import OfferCard from "../component/card/OfferCard";
 
-const Jobs = () => {
+const Offer = () => {
 
 	const { getValidToken } = useContext(AuthContext)
 
@@ -26,5 +26,5 @@ const Jobs = () => {
     )
 }
 
-export default Jobs;
+export default Offer;
 

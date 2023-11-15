@@ -6,7 +6,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Conversation from "./src/page/Conversation";
-import Jobs from "./src/page/Jobs";
+import Offer from "./src/page/Offer";
 import Profile from "./src/page/Profile";
 import Notification from "./src/page/Notification";
 import Home from "./src/page/Home";
@@ -120,8 +120,8 @@ export default function App() {
 // 						}}
 // 					/>
 // 					<Tab.Screen
-// 						name="Jobs"
-// 						component={Jobs}
+// 						name="Offer"
+// 						component={Offer}
 // 						options={{
 // 							tabBarIcon: ({ color, size }) => (
 // 								<MaterialIcons name="work" color={color} size={size} />

@@ -6,7 +6,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Conversation from "../page/Conversation";
-import Jobs from "../page/Jobs";
+import Offer from "../page/Offer";
 import Profile from "../page/Profile";
 import Notification from "../page/Notification";
 import Home from "../page/Home";
@@ -88,7 +88,7 @@ export default function Navigation() {
 					/>
 					<Tab.Screen
 						name="Jobs"
-						component={Jobs}
+						component={Offer}
 						options={{
 							tabBarIcon: ({color, size}) => (
 								<MaterialIcons name="work" color={color} size={size}/>
