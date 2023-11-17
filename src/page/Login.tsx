@@ -1,18 +1,6 @@
-import {
-	View,
-	Text,
-	TextInput,
-	Button,
-	SafeAreaView,
-	Image,
-	Modal,
-	Alert,
-	Pressable,
-	TouchableOpacity
-} from 'react-native';
+import { View, Text, TextInput, SafeAreaView, Image, Pressable, TouchableOpacity} from 'react-native';
 import { useForm, Controller } from 'react-hook-form';
 import axios from "axios";
-// import {getToken, storeRefreshToken, storeToken} from "../auth/Auth";
 import Logo from "../../assets/logo.png"
 import {useContext, useState} from "react";
 import {useNavigation} from "@react-navigation/native";
@@ -22,20 +10,17 @@ import {useTranslation} from "react-i18next";
 function Login() {
 	const { control, handleSubmit, formState: { errors }, setError } = useForm();
 	const { setUserToken, setRefreshToken } = useContext(AuthContext)
-	// const [modalVisible, setModalVisible] = useState(false);
 
 	const navigation = useNavigation();
 
 	const { t } = useTranslation();
 
 	const handleNavigateToRegister = () => {
-		// Utilisez la fonction navigation.navigate pour naviguer vers la page d'inscription (Register)
 		navigation.navigate('Register');
 	}
 
 	const onSubmit = async (data) => {
 		try {
-			// Configuration de l'en-tête pour le type x-www-form-urlencoded
 			const config = {
 				headers: {
 					'Content-Type': 'application/json',
@@ -44,25 +29,13 @@ function Login() {
 			};
 
 			let details = {
-				// 'grant_type': 'password',
-				// 'client_id': 'seasonsforce-client',
 				'username': data.email,
-				'password': data.password,
+				'password': data.password
 			};
 
-			// let formBody: [string] = [];
-			// for (let property in details) {
-			// 	let encodedKey = encodeURIComponent(property);
-			// 	let encodedValue = encodeURIComponent(details[property]);
-			// 	formBody.push(encodedKey + "=" + encodedValue);
-			// }
-			// let formBodyString : string = formBody.join("&");
-
-			// URL de l'endpoint POST
 			const url = 'http://localhost:8090/api/v1/user/auth/login';
 
 			try {
-				// Effectuer la requête POST
 				const response = await axios.post(url, details, config);
 				await setUserToken(response.data.access_token)
 				await setRefreshToken(response.data.refresh_token)
@@ -82,25 +55,6 @@ function Login() {
 
 	return (
 		<SafeAreaView className="flex-col justify-center items-center w-full h-full bg-background">
-
-			{/*<Modal*/}
-			{/*	// animationType="slide"*/}
-			{/*	transparent={true}*/}
-			{/*	visible={modalVisible}*/}
-			{/*	onRequestClose={() => {*/}
-			{/*		Alert.alert('Modal has been closed.');*/}
-			{/*		setModalVisible(!modalVisible);*/}
-			{/*	}}>*/}
-			{/*	<SafeAreaView className="flex h-full w-full bg-gray-100 justify-center items-center">*/}
-			{/*		<View className="flex justify-around items-center w-80 h-40 bg-white">*/}
-			{/*			<Text>Mot de passe ou email erroné !</Text>*/}
-			{/*			<Pressable*/}
-			{/*				onPress={() => setModalVisible(!modalVisible)}>*/}
-			{/*				<Text>Hide Modal</Text>*/}
-			{/*			</Pressable>*/}
-			{/*		</View>*/}
-			{/*	</SafeAreaView>*/}
-			{/*</Modal>*/}
 
 				<View className="flex-col items-center mb-10">
 					<Image source={Logo} className="w-40 h-40" />
