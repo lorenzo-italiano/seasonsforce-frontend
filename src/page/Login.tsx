@@ -2,10 +2,11 @@ import { View, Text, TextInput, SafeAreaView, Image, Pressable, TouchableOpacity
 import { useForm, Controller } from 'react-hook-form';
 import axios from "axios";
 import Logo from "../../assets/logo.png"
-import {useContext, useState} from "react";
+import React, {useContext, useState} from "react";
 import {useNavigation} from "@react-navigation/native";
 import {AuthContext} from "../context/AuthContext";
 import {useTranslation} from "react-i18next";
+import TextInputForm from "../component/form/input/TextInputForm";
 
 function Login() {
 	const { control, handleSubmit, formState: { errors }, setError } = useForm();
@@ -62,42 +63,22 @@ function Login() {
 				</View>
 
 				<View className="flex-col w-2/5">
-					<Text className="font-bold text-lg">{t("login.fields.username.placeholder")}</Text>
-					<Controller
-						defaultValue=""
-						control={control}
-						render={({ field , fieldState}) => (
-							<TextInput
-								className="border border-gray-400 rounded p-2 mb-2"
-								onChangeText={field.onChange}
-								value={field.value}
-								autoCapitalize="none"
-								placeholder={t("login.fields.username.placeholder")}
-							/>
-						)}
+					<TextInputForm
+						label={t("login.fields.username.placeholder")}
 						name="email"
-						rules={{ required: t("login.fields.username.required") }}
-					/>
-					{errors.email && <Text className="text-red-800 font-bold">{errors.email.message}</Text>}
-
-
-					<Text className="font-bold text-lg">{t("login.fields.password.placeholder")}</Text>
-					<Controller
-						defaultValue=""
 						control={control}
-						render={({ field, fieldState }) => (
-							<TextInput
-								className="border border-gray-400 rounded p-2 mb-4"
-								onChangeText={field.onChange}
-								value={field.value}
-								placeholder={t("login.fields.password.placeholder")}
-								secureTextEntry
-							/>
-						)}
-						name="password"
-						rules={{ required: t("login.fields.password.required") }}
+						rules={{ required: t("login.fields.username.required") }}
+						placeholder={t("login.fields.username.placeholder")}
 					/>
-					{errors.password && <Text className="text-red-800 font-bold">{errors.password.message}</Text>}
+
+					<TextInputForm
+						label={t("login.fields.password.placeholder")}
+						name="password"
+						control={control}
+						rules={{ required: t("login.fields.password.required") }}
+						placeholder={t("login.fields.password.placeholder")}
+						secureTextEntry
+					/>
 
 					<Pressable className="mb-5" onPress={handleNavigateToRegister}>
 						<Text className="text-sm text-accent-blue">{t("login.no-account")}</Text>
