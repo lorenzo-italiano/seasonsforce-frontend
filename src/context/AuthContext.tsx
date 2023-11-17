@@ -25,6 +25,8 @@ type AuthContextType = {
 	getUserById: () => Promise<void>
 	isRegistered: () => Promise<boolean>
 	getUserRole: () => string
+	getUserCompanyId: () => Promise<string>
+	getUserId: () => string
 };
 
 export const AuthContext = React.createContext<AuthContextType | null>(null);
@@ -73,7 +75,7 @@ const AuthProvider: React.FC<React.ReactNode> = ({ children }) => {
 
 		try {
 
-			console.log(userToken)
+			// console.log(userToken)
 
 			const token = "Bearer " + userToken
 
@@ -87,31 +89,31 @@ const AuthProvider: React.FC<React.ReactNode> = ({ children }) => {
 
 			const resp = await axios.post("http://localhost:8090/api/v1/user/logout/" + decodedToken.sub, body, config)
 
-			console.log(resp.data)
+			// console.log(resp.data)
 
 			await AsyncStorage.removeItem('authToken');
 			setUserToken(null)
-			console.log("user token removed")
+			// console.log("user token removed")
 
 			await AsyncStorage.removeItem('refreshToken');
 			setRefreshToken(null)
-			console.log("refresh token removed")
+			// console.log("refresh token removed")
 
 		} catch (error) {
 			console.error('Erreur lors de la déconnexion : ', error);
 
 			await AsyncStorage.removeItem('authToken');
 			setUserToken(null)
-			console.log("user token removed")
+			// console.log("user token removed")
 
 			await AsyncStorage.removeItem('refreshToken');
 			setRefreshToken(null)
-			console.log("refresh token removed")
+			// console.log("refresh token removed")
 		}
 	};
 
 	const getUserById: () => Promise<void> = async () => {
-		console.log(userToken)
+		// console.log(userToken)
 		if (userToken === null) {
 			return
 		}
@@ -125,7 +127,7 @@ const AuthProvider: React.FC<React.ReactNode> = ({ children }) => {
 		}
 
 		const resp = await axios.get("http://localhost:8090/api/v1/user/" + decodedToken.sub, config)
-		console.log(resp)
+		// console.log(resp)
 		return resp.data
 	}
 
@@ -135,7 +137,7 @@ const AuthProvider: React.FC<React.ReactNode> = ({ children }) => {
 		}
 
 		const decodedToken = jwtDecode(userToken?.toString(), {body: true})
-		console.log(decodedToken)
+		// console.log(decodedToken)
 
 		const config = {
 			headers: {
@@ -144,10 +146,10 @@ const AuthProvider: React.FC<React.ReactNode> = ({ children }) => {
 		}
 
 		const resp = await axios.get("http://localhost:8090/api/v1/user/" + decodedToken.sub, config)
-		console.log(resp.data.isRegistered)
+		// console.log(resp.data.isRegistered)
 		// const user = await getUserById()
 
-		console.log("AuthContext isRegistered ? " + resp.data.isRegistered)
+		// console.log("AuthContext isRegistered ? " + resp.data.isRegistered)
 
 		if (getUserRole() === "admin") {
 			return true
@@ -158,17 +160,29 @@ const AuthProvider: React.FC<React.ReactNode> = ({ children }) => {
 
 	const getUserRole: () => string = () => {
 		if (userToken === null) {
-			return ""
+			return "test"
 		}
 
-		console.log("decoded token")
+		// console.log("decoded token")
 
 		const decodedToken = jwtDecode(userToken?.toString(), {body: true})
 
-		console.log(decodedToken)
+		// console.log(decodedToken)
 
 		return decodedToken.resource_access["seasonsforce-client"].roles[0].split("_")[1]
 		// return decodedToken.
+	}
+
+	const getUserCompanyId: () => Promise<string> = async () => {
+		const user = await getUserById()
+
+		return user.companyId
+	}
+
+	const getUserId: () => string = () => {
+		const decodedToken = jwtDecode(userToken?.toString(), {body: true})
+
+		return decodedToken.sub
 	}
 
 	const isTokenExpired: () => Promise<boolean> = async () => {
@@ -180,10 +194,10 @@ const AuthProvider: React.FC<React.ReactNode> = ({ children }) => {
 
 		// JWT exp is in seconds
 		if (decodedToken.exp * 1000 < currentDate.getTime()) {
-			console.log("Token expired.");
+			// console.log("Token expired.");
 			return true
 		} else {
-			console.log("Valid token");
+			// console.log("Valid token");
 			return false
 		}
 	}
@@ -195,7 +209,7 @@ const AuthProvider: React.FC<React.ReactNode> = ({ children }) => {
 				refresh_token: refreshToken
 			}
 
-			console.log(refreshToken)
+			// console.log(refreshToken)
 
 			try {
 				const newToken = await axios.post("http://localhost:8090/api/v1/user/auth/refresh", refreshTokenObj)
@@ -204,7 +218,7 @@ const AuthProvider: React.FC<React.ReactNode> = ({ children }) => {
 				return newToken.data.access_token
 			} catch (error) {
 				if (error.request.status === 400) {
-					console.log("need to login again")
+					// console.log("need to login again")
 					await logout()
 				}
 			}
@@ -213,7 +227,7 @@ const AuthProvider: React.FC<React.ReactNode> = ({ children }) => {
 	}
 
 	return (
-		<AuthContext.Provider value={{ userToken, refreshToken, setUserToken: setUserTokenAndStore, setRefreshToken: setRefreshTokenAndStore, logout, isTokenExpired, isUserAuthenticated, getValidToken, getUserById, isRegistered, getUserRole }}>
+		<AuthContext.Provider value={{ userToken, refreshToken, setUserToken: setUserTokenAndStore, setRefreshToken: setRefreshTokenAndStore, logout, isTokenExpired, isUserAuthenticated, getValidToken, getUserById, isRegistered, getUserRole, getUserCompanyId, getUserId }}>
 			{children}
 		</AuthContext.Provider>
 	)

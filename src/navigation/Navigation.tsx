@@ -1,5 +1,3 @@
-import { NativeWindStyleSheet } from "nativewind";
-import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import {NavigationContainer} from "@react-navigation/native";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -11,17 +9,14 @@ import Profile from "../page/Profile";
 import Notification from "../page/Notification";
 import Home from "../page/Home";
 import {useContext, useEffect, useState} from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-// import {NavigationProvider} from "./src/NavigationProvider";
 import {createStackNavigator} from "@react-navigation/stack";
 import {AuthContext} from "../context/AuthContext";
 import Register from "../page/Register";
 import Login from "../page/Login";
-import OfferDetail from "../component/detail/OfferDetail";
 import {Pressable, Text, View} from "react-native";
-import RegisterFormRecruiterStep from "../component/registerform/specificforms/RegisterFormRecruiterStep";
-import RegisterFormCandidateStep from "../component/registerform/specificforms/RegisterFormCandidateStep";
 import RegisterSpecificStep from "../component/registerform/RegisterSpecificStep";
+import CreateOrUpdateOfferForm from "../page/form/offer/CreateOrUpdateOfferForm";
+import OfferDetail from "../page/detail/OfferDetail";
 
 
 const Tab = createBottomTabNavigator();
@@ -58,13 +53,13 @@ export default function Navigation() {
 	}
 
 	return (
-		<NavigationContainer>
+		<NavigationContainer className="bg-background">
 			{ isUserAuthenticated && isRegisteredVal &&
 				<Tab.Navigator
 					screenOptions={{
 						//TODO mettre une couleur de la palette
 						tabBarActiveTintColor: '#a83232',
-						headerShown: false
+						headerShown: false,
 					}}
 					initialRouteName="Home"
 				>
@@ -87,7 +82,7 @@ export default function Navigation() {
 						}}
 					/>
 					<Tab.Screen
-						name="Jobs"
+						name="Offer"
 						component={Offer}
 						options={{
 							tabBarIcon: ({color, size}) => (
@@ -97,8 +92,14 @@ export default function Navigation() {
 					/>
 					<Tab.Screen
 						name="OfferDetail"
-						children={() => <OfferDetail/>}
-						// initialParams={{ onLogout: handleLogout }}
+						children={() => <OfferDetail />}
+						options={{
+							tabBarButton: () => null
+						}}
+					/>
+					<Tab.Screen
+						name="CreateOfferForm"
+						children={() => <CreateOrUpdateOfferForm/>}
 						options={{
 							tabBarButton: () => null
 						}}

@@ -1,27 +1,51 @@
-import {SafeAreaView, Text} from "react-native";
-import React, {useContext} from "react";
-import useFetchOfferList from "../rest/hook/useFetchOfferList";
+import {Pressable, SafeAreaView, Text, View} from "react-native";
+import React, {useContext, useEffect, useState} from "react";
 import {AuthContext} from "../context/AuthContext";
-import OfferCard from "../component/card/OfferCard";
+import CandidateOfferList from "../component/list/offer/CandidateOfferList";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import RecruiterOfferList from "../component/list/offer/RecruiterOfferList";
+import {useNavigation} from "@react-navigation/native";
+import {OfferDetailRouteParams} from "../model/create/OfferDetailRouteParams";
 
 const Offer = () => {
 
-	const { getValidToken } = useContext(AuthContext)
+	const {getUserRole, userToken} = useContext(AuthContext)
+	const [role, setRole] = useState<string>(null)
+	const navigation = useNavigation()
 
-	const offerList = useFetchOfferList(getValidToken)
-
-	if (offerList.isLoading) {
-		return (
-			<Text>Loading</Text>
-		)
-	}
+	useEffect(() => {
+		setRole(getUserRole())
+	}, [userToken]);
 
     return(
-        <SafeAreaView className="w-screen flex-1 items-center justify-center bg-white">
-			<Text className="w-5/6 text-4xl font-bold mb-5">Offres d'emploi</Text>
-			{
-				offerList.data?.map((offer) => {return <OfferCard key={offer.id} offer={offer} />})
+        <SafeAreaView className="w-screen flex-1 flex bg-background">
+
+			{ role === "candidate" &&
+				<>
+					<Text className="w-full px-16 text-4xl font-bold my-5">Offres d'emplois</Text>
+					<CandidateOfferList />
+				</>
 			}
+
+			{ role === "recruiter" &&
+				<>
+					<View className="flex flex-row justify-between items-center w-full px-16">
+						<Text className=" text-4xl font-bold my-5">Offres d'emplois de mon entreprise</Text>
+						<Pressable onPress={() => {
+							const param : OfferDetailRouteParams = {
+								initialValues: undefined,
+								isUpdate: false
+							}
+							navigation.navigate("CreateOfferForm", param)
+						}}>
+							<MaterialCommunityIcons name="plus-circle" size={32}/>
+						</Pressable>
+					</View>
+
+					<RecruiterOfferList />
+				</>
+			}
+
         </SafeAreaView>
     )
 }

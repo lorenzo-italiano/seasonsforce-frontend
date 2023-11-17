@@ -12,3 +12,18 @@ export function formatDateToISO(dateStr: string): string | null {
 
 	return null;
 }
+
+export function formatIsoToSimpleDate(dateStr: string): string {
+	const dateObject = new Date(dateStr);
+
+	if (isNaN(dateObject.getTime())) {
+		// Gérer les cas où la date d'entrée n'est pas valide
+		return 'Date invalide';
+	}
+
+	const day = String(dateObject.getDate()).padStart(2, '0');
+	const month = String(dateObject.getMonth() + 1).padStart(2, '0'); // Les mois sont 0-indexés
+	const year = dateObject.getFullYear();
+
+	return `${day}/${month}/${year}`;
+}

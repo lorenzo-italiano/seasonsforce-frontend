@@ -11,8 +11,8 @@ const OfferCard = ({ offer }) => {
 	};
 
 	return (
-		<TouchableOpacity className="flex w-5/6 bg-gray-200 rounded-2xl" onPress={handleCardPress}>
-			<View className="flex p-4 gap-3">
+		<TouchableOpacity className="flex w-full bg-accent-blue rounded-2xl mb-5" onPress={handleCardPress}>
+			<View className="w-full flex p-4 gap-3">
 				<View className="flex flex-row items-center justify-between">
 					<Text className="text-xl font-bold">{offer.job_title}</Text>
 					<Image className="w-20 h-20" source={{ uri: offer.company.logoUrl }} />

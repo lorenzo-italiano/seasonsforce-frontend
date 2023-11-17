@@ -357,7 +357,7 @@ const RegisterFormSecondStep = forwardRef(({ onSubmitSecondStep }, ref) => {
 								required: 'Le numéro de téléphone est requis',
 								pattern: {
 									value: /^[\d\s()+-]+$/,
-									message: 'La date de naissance doit être au format JJ/MM/AAAA',
+									message: 'Le numéro de téléphone doit contenir uniquement des chiffres, des parenthèses, le signe + ou un tiret',
 								},
 							}
 						}

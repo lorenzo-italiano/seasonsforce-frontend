@@ -1,5 +1,5 @@
 import {useQuery} from "@tanstack/react-query";
-import {getAll} from "../queries/QueryService";
+import {getAll} from "../../queries/QueryService";
 
 export default function useFetchOfferList(getValidToken: () => Promise<string>) {
 	return useQuery({

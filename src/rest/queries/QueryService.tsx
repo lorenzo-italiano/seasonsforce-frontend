@@ -4,7 +4,7 @@ export async function getAll(endpointUrl: String, getValidToken: () => Promise<s
 
 	let token: String = "Bearer " + await getValidToken()
 
-	console.log(token)
+	// console.log(token)
 
 	const config = {
 		headers: {
@@ -14,7 +14,7 @@ export async function getAll(endpointUrl: String, getValidToken: () => Promise<s
 
     const res = await axios.get(endpointUrl, config);
 
-    console.log(res.data)
+    // console.log(res.data)
     return res.data;
 }
 
@@ -53,6 +53,36 @@ export async function patch(endpointUrl: String, data: Object, getValidToken: ()
 	}
 
 	const res = await axios.patch(endpointUrl, data, config);
+
+	return res.data;
+}
+
+export async function put(endpointUrl: String, data: Object, getValidToken: () => Promise<string>) {
+
+	let token: String = "Bearer " + await getValidToken()
+
+	const config = {
+		headers: {
+			Authorization: token,
+		}
+	}
+
+	const res = await axios.put(endpointUrl, data, config);
+
+	return res.data;
+}
+
+export async function deleteById(endpointUrl: String, getValidToken: () => Promise<string>) {
+
+	let token: String = "Bearer " + await getValidToken()
+
+	const config = {
+		headers: {
+			Authorization: token,
+		}
+	}
+
+	const res = await axios.delete(endpointUrl, config);
 
 	return res.data;
 }
