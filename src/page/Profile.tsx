@@ -2,6 +2,7 @@ import {Button, SafeAreaView, Text} from "react-native";
 import React, {useContext} from "react";
 import {logout} from "../auth/Auth";
 import {AuthContext} from "../context/AuthContext";
+import LanguageSelector from "../component/i18n/LanguageSelector";
 
 const Profile = () => {
 
@@ -20,7 +21,9 @@ const Profile = () => {
                 Profile
             </Text>
 
-			<Button title="dicconnect" onPress={logout} />
+			<LanguageSelector />
+
+			<Button title="disconnect" onPress={logout} />
 
         </SafeAreaView>
     )

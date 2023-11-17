@@ -17,6 +17,7 @@ import Logo from "../../assets/logo.png"
 import {useContext, useState} from "react";
 import {useNavigation} from "@react-navigation/native";
 import {AuthContext} from "../context/AuthContext";
+import {useTranslation} from "react-i18next";
 
 function Login() {
 	const { control, handleSubmit, formState: { errors }, setError } = useForm();
@@ -24,6 +25,8 @@ function Login() {
 	// const [modalVisible, setModalVisible] = useState(false);
 
 	const navigation = useNavigation();
+
+	const { t } = useTranslation();
 
 	const handleNavigateToRegister = () => {
 		// Utilisez la fonction navigation.navigate pour naviguer vers la page d'inscription (Register)
@@ -101,11 +104,11 @@ function Login() {
 
 				<View className="flex-col items-center mb-10">
 					<Image source={Logo} className="w-40 h-40" />
-					<Text className="text-4xl font-bold">Connexion</Text>
+					<Text className="text-4xl font-bold">{t('login.title')}</Text>
 				</View>
 
 				<View className="flex-col w-2/5">
-					<Text className="font-bold text-lg">Email</Text>
+					<Text className="font-bold text-lg">{t("login.username")}</Text>
 					<Controller
 						defaultValue=""
 						control={control}
@@ -115,7 +118,7 @@ function Login() {
 								onChangeText={field.onChange}
 								value={field.value}
 								autoCapitalize="none"
-								placeholder="Email"
+								placeholder={t("login.username")}
 							/>
 						)}
 						name="email"

@@ -19,10 +19,12 @@ import TabNavigator from "./src/TabNavigator";
 import Register from "./src/page/Register";
 import AuthProvider, {AuthContext} from "./src/context/AuthContext";
 import Navigation from "./src/navigation/Navigation";
+import "./src/i18n/i18n";
 
 NativeWindStyleSheet.setOutput({
     default: "native",
 });
+
 
 const queryClient = new QueryClient()
 

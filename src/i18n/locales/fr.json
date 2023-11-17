@@ -1,0 +1,12 @@
+{
+  "login": {
+	"title": "Connexion",
+	"username": "Nom d'utilisateur",
+	"password": "Mot de passe",
+	"no-account": "Pas de compte ? Inscrivez-vous !",
+	"forgot": "Mot de passe oublié ?"
+  },
+  "common": {
+	"language": "Français"
+  }
+}
