@@ -62,7 +62,7 @@ function Login() {
 				</View>
 
 				<View className="flex-col w-2/5">
-					<Text className="font-bold text-lg">{t("login.username")}</Text>
+					<Text className="font-bold text-lg">{t("login.fields.username.placeholder")}</Text>
 					<Controller
 						defaultValue=""
 						control={control}
@@ -72,16 +72,16 @@ function Login() {
 								onChangeText={field.onChange}
 								value={field.value}
 								autoCapitalize="none"
-								placeholder={t("login.username")}
+								placeholder={t("login.fields.username.placeholder")}
 							/>
 						)}
 						name="email"
-						rules={{ required: "l'email est requis" }}
+						rules={{ required: t("login.fields.username.required") }}
 					/>
 					{errors.email && <Text className="text-red-800 font-bold">{errors.email.message}</Text>}
 
 
-					<Text className="font-bold text-lg">Mot de passe</Text>
+					<Text className="font-bold text-lg">{t("login.fields.password.placeholder")}</Text>
 					<Controller
 						defaultValue=""
 						control={control}
@@ -90,17 +90,17 @@ function Login() {
 								className="border border-gray-400 rounded p-2 mb-4"
 								onChangeText={field.onChange}
 								value={field.value}
-								placeholder="Mot de passe"
+								placeholder={t("login.fields.password.placeholder")}
 								secureTextEntry
 							/>
 						)}
 						name="password"
-						rules={{ required: 'Le mot de passe est requis' }}
+						rules={{ required: t("login.fields.password.required") }}
 					/>
 					{errors.password && <Text className="text-red-800 font-bold">{errors.password.message}</Text>}
 
 					<Pressable className="mb-5" onPress={handleNavigateToRegister}>
-						<Text className="text-sm text-accent-blue">Pas de compte ? Inscrivez vous !</Text>
+						<Text className="text-sm text-accent-blue">{t("login.no-account")}</Text>
 					</Pressable>
 
 					{/*<Button title="Se connecter" onPress={handleSubmit(onSubmit)} />*/}
@@ -108,7 +108,7 @@ function Login() {
 						<Text className="text-center text-background font-bold text-xl" >Se connecter</Text>
 					</TouchableOpacity>
 
-					<Text className="text-sm mt-2 text-accent-blue">Mot de passe oublié ?</Text>
+					<Text className="text-sm mt-2 text-accent-blue">{t("login.forgot")}</Text>
 				</View>
 
 		</SafeAreaView>

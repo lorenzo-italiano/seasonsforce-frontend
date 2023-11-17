@@ -1,8 +1,16 @@
 {
   "login": {
 	"title": "Connexion",
-	"username": "Nom d'utilisateur",
-	"password": "Mot de passe",
+	"fields": {
+	  "username": {
+		"placeholder": "Nom d'utilisateur",
+		"required": "Nom d'utilisateur requis"
+	  },
+	  "password": {
+		"placeholder": "Mot de passe",
+		"required": "Mot de passe requis"
+	  }
+	},
 	"no-account": "Pas de compte ? Inscrivez-vous !",
 	"forgot": "Mot de passe oublié ?"
   },
