@@ -1,8 +1,8 @@
-import { View, Text, TextInput, SafeAreaView, Image, Pressable, TouchableOpacity} from 'react-native';
-import { useForm, Controller } from 'react-hook-form';
+import { View, Text, SafeAreaView, Image, Pressable, TouchableOpacity} from 'react-native';
+import { useForm } from 'react-hook-form';
 import axios from "axios";
 import Logo from "../../assets/logo.png"
-import React, {useContext, useState} from "react";
+import React, {useContext} from "react";
 import {useNavigation} from "@react-navigation/native";
 import {AuthContext} from "../context/AuthContext";
 import {useTranslation} from "react-i18next";
@@ -49,7 +49,6 @@ function Login() {
 			}
 
 		} catch (error) {
-			// Gérez les erreurs ici
 			console.error('Erreur lors de la requête POST :', error);
 		}
 	};
@@ -84,7 +83,6 @@ function Login() {
 						<Text className="text-sm text-accent-blue">{t("login.no-account")}</Text>
 					</Pressable>
 
-					{/*<Button title="Se connecter" onPress={handleSubmit(onSubmit)} />*/}
 					<TouchableOpacity className="border-primary rounded-lg bg-primary p-2" onPress={handleSubmit(onSubmit)}>
 						<Text className="text-center text-background font-bold text-xl" >Se connecter</Text>
 					</TouchableOpacity>
