@@ -3,6 +3,7 @@ import {FlatList, Text, View} from "react-native";
 import {AuthContext} from "../../../context/AuthContext";
 import useFetchOfferList from "../../../rest/hook/offer/useFetchOfferList";
 import OfferCard from "../../card/OfferCard";
+import LoadingSpinner from "../../loading/LoadingSpinner";
 
 const CandidateOfferList = () => {
 
@@ -12,7 +13,7 @@ const CandidateOfferList = () => {
 
 	if (isLoading) {
 		return (
-			<Text>Loading</Text>
+			<LoadingSpinner/>
 		)
 	}
 

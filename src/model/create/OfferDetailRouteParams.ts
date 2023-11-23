@@ -1,6 +1,6 @@
 import {Offer} from "./Offer";
 
 export interface OfferDetailRouteParams {
-	initialValues: Offer | undefined
+	initialValues: Object | undefined
 	isUpdate: boolean
 }

@@ -10,6 +10,7 @@ import {Address} from "../../../model/Address";
 import useFetchAllPlan from "../../../rest/hook/plan/useFetchAllPlan";
 import Logo from "../../../../assets/logo.png";
 import usePatchUser from "../../../rest/hook/user/usePatchUser";
+import LoadingSpinner from "../../loading/LoadingSpinner";
 
 const RegisterFormRecruiterStep = () => {
 
@@ -68,7 +69,7 @@ const RegisterFormRecruiterStep = () => {
 
 	if (allPlan.isLoading) {
 		return (
-			<Text>Loading</Text>
+			<LoadingSpinner/>
 		)
 	}
 

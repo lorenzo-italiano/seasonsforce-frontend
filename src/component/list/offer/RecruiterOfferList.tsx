@@ -4,6 +4,7 @@ import {AuthContext} from "../../../context/AuthContext";
 import useFetchOfferList from "../../../rest/hook/offer/useFetchOfferList";
 import OfferCard from "../../card/OfferCard";
 import useFetchCompanyOfferList from "../../../rest/hook/offer/useFetchCompanyOfferList";
+import LoadingSpinner from "../../loading/LoadingSpinner";
 
 const RecruiterOfferList = () => {
 
@@ -23,7 +24,7 @@ const RecruiterOfferList = () => {
 
 	if (isLoading) {
 		return (
-			<Text>Loading</Text>
+			<LoadingSpinner/>
 		)
 	}
 

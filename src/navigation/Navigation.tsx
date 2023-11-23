@@ -8,7 +8,7 @@ import Offer from "../page/Offer";
 import Profile from "../page/Profile";
 import Notification from "../page/Notification";
 import Home from "../page/Home";
-import {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {createStackNavigator} from "@react-navigation/stack";
 import {AuthContext} from "../context/AuthContext";
 import Register from "../page/Register";
@@ -17,6 +17,11 @@ import {Pressable, Text, View} from "react-native";
 import RegisterSpecificStep from "../component/registerform/RegisterSpecificStep";
 import CreateOrUpdateOfferForm from "../page/form/offer/CreateOrUpdateOfferForm";
 import OfferDetail from "../page/detail/OfferDetail";
+import AdminPanel from "../page/AdminPanel";
+import ProfilePage from "../page/detail/ProfilePage";
+import AddOrModifyAvailability from "../page/form/availability/AddOrModifyAvailability";
+import CreateReview from "../page/form/review/CreateReview";
+import LoadingSpinner from "../component/loading/LoadingSpinner";
 
 
 const Tab = createBottomTabNavigator();
@@ -44,7 +49,7 @@ export default function Navigation() {
 	if (isLoading) {
 		return (
 			<>
-				<Text>Loading</Text>
+				<LoadingSpinner/>
 				<Pressable onPress={logout}>
 					<Text>logout</Text>
 				</Pressable>
@@ -105,6 +110,13 @@ export default function Navigation() {
 						}}
 					/>
 					<Tab.Screen
+						name="CreateReview"
+						children={() => <CreateReview/>}
+						options={{
+							tabBarButton: () => null
+						}}
+					/>
+					<Tab.Screen
 						name="Notifications"
 						component={Notification}
 						options={{
@@ -121,6 +133,27 @@ export default function Navigation() {
 							tabBarIcon: ({color, size}) => (
 								<FontAwesome name="user" color={color} size={size}/>
 							),
+						}}
+					/>
+					<Tab.Screen
+						name="AdminPanel"
+						children={() => <AdminPanel />}
+						options={{
+							tabBarButton: () => null
+						}}
+					/>
+					<Tab.Screen
+						name="ProfilePage"
+						children={() => <ProfilePage />}
+						options={{
+							tabBarButton: () => null
+						}}
+					/>
+					<Tab.Screen
+						name="AddOrModifyAvailability"
+						children={() => <AddOrModifyAvailability />}
+						options={{
+							tabBarButton: () => null
 						}}
 					/>
 				</Tab.Navigator>

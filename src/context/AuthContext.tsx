@@ -4,6 +4,7 @@ import {useEffect} from "react";
 import {jwtDecode} from "jwt-decode";
 import axios from "axios";
 import { decode, encode } from 'base-64';
+import {getAll, post} from "../rest/queries/QueryService";
 
 if (!global.btoa) {
 	global.btoa = encode;
@@ -74,61 +75,55 @@ const AuthProvider: React.FC<React.ReactNode> = ({ children }) => {
 		const decodedToken = jwtDecode(userToken?.toString(), {body: true})
 
 		try {
-
-			// console.log(userToken)
+			const body = {}
 
 			const token = "Bearer " + userToken
-
-			const body = {}
 
 			const config = {
 				headers: {
 					Authorization: token
 				}
 			}
-
 			const resp = await axios.post("http://localhost:8090/api/v1/user/logout/" + decodedToken.sub, body, config)
 
 			// console.log(resp.data)
 
 			await AsyncStorage.removeItem('authToken');
 			setUserToken(null)
-			// console.log("user token removed")
 
 			await AsyncStorage.removeItem('refreshToken');
 			setRefreshToken(null)
-			// console.log("refresh token removed")
 
 		} catch (error) {
 			console.error('Erreur lors de la déconnexion : ', error);
 
 			await AsyncStorage.removeItem('authToken');
 			setUserToken(null)
-			// console.log("user token removed")
 
 			await AsyncStorage.removeItem('refreshToken');
 			setRefreshToken(null)
-			// console.log("refresh token removed")
 		}
 	};
 
 	const getUserById: () => Promise<void> = async () => {
-		// console.log(userToken)
 		if (userToken === null) {
 			return
 		}
 
-		const decodedToken = jwtDecode(userToken?.toString(), {body: true})
+		try {
+			const decodedToken = jwtDecode(userToken?.toString(), {body: true})
 
-		const config = {
-			headers: {
-				Authorization: "Bearer " + userToken
+			const config = {
+				headers: {
+					Authorization: "Bearer " + userToken
+				}
 			}
-		}
 
-		const resp = await axios.get("http://localhost:8090/api/v1/user/" + decodedToken.sub, config)
-		// console.log(resp)
-		return resp.data
+			const resp = await axios.get("http://localhost:8090/api/v1/user/" + decodedToken.sub, config)
+			return resp.data
+		} catch (error) {
+			console.error('Erreur lors de la récupération du User : ', error);
+		}
 	}
 
 	const isRegistered: () => Promise<boolean> = async () => {
@@ -159,18 +154,9 @@ const AuthProvider: React.FC<React.ReactNode> = ({ children }) => {
 	}
 
 	const getUserRole: () => string = () => {
-		if (userToken === null) {
-			return "test"
-		}
-
-		// console.log("decoded token")
-
 		const decodedToken = jwtDecode(userToken?.toString(), {body: true})
 
-		// console.log(decodedToken)
-
 		return decodedToken.resource_access["seasonsforce-client"].roles[0].split("_")[1]
-		// return decodedToken.
 	}
 
 	const getUserCompanyId: () => Promise<string> = async () => {
@@ -187,19 +173,10 @@ const AuthProvider: React.FC<React.ReactNode> = ({ children }) => {
 
 	const isTokenExpired: () => Promise<boolean> = async () => {
 		const decodedToken = jwtDecode(userToken?.toString(), {body: true})
-		// const decodedToken = atob(userToken?.toString())
-		// jwt.decode()
 
 		let currentDate = new Date();
 
-		// JWT exp is in seconds
-		if (decodedToken.exp * 1000 < currentDate.getTime()) {
-			// console.log("Token expired.");
-			return true
-		} else {
-			// console.log("Valid token");
-			return false
-		}
+		return decodedToken.exp * 1000 < currentDate.getTime();
 	}
 
 	const getValidToken: () => Promise<string> = async () => {
@@ -209,8 +186,6 @@ const AuthProvider: React.FC<React.ReactNode> = ({ children }) => {
 				refresh_token: refreshToken
 			}
 
-			// console.log(refreshToken)
-
 			try {
 				const newToken = await axios.post("http://localhost:8090/api/v1/user/auth/refresh", refreshTokenObj)
 
@@ -218,7 +193,6 @@ const AuthProvider: React.FC<React.ReactNode> = ({ children }) => {
 				return newToken.data.access_token
 			} catch (error) {
 				if (error.request.status === 400) {
-					// console.log("need to login again")
 					await logout()
 				}
 			}
