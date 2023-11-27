@@ -7,6 +7,8 @@ import {AuthContext} from "../../context/AuthContext";
 import useAddResponseToReview from "../../rest/hook/review/useAddResponseToReview";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import useRemoveResponseToReview from "../../rest/hook/review/useRemoveResponseToReview";
+import useDeleteReview from "../../rest/hook/review/useDeleteReview";
+import {useNavigation} from "@react-navigation/native";
 
 const ReviewCard = ({review}) => {
 
@@ -16,6 +18,13 @@ const ReviewCard = ({review}) => {
 
 	const sendResponse = useAddResponseToReview(getUserId(), review.id, getValidToken)
 	const deleteResponse = useRemoveResponseToReview(getUserId(), review.id, getValidToken)
+	const deleteReview = useDeleteReview(review.user.id, review, getValidToken)
+	const navigation = useNavigation()
+
+	const handleUpdateReview = () => {
+		navigation.navigate("UpdateReview", {review: review})
+	}
+
 
 	const handleDeleteResponse = async (response) => {
 		try {
@@ -25,7 +34,16 @@ const ReviewCard = ({review}) => {
 			console.error(error.message)
 			return
 		}
+	}
 
+	const handleDeleteReview = async (review) => {
+		try {
+			await deleteReview.mutateAsync(review)
+		}
+		catch (error) {
+			console.error(error.message)
+			return
+		}
 	}
 
 	const onSubmit = async (data) => {
@@ -53,6 +71,16 @@ const ReviewCard = ({review}) => {
 					<Text>{review.sender.role === "recruiter" ? "Recruteur" : ""}</Text>
 				</View>
 				<View className="flex-col flex-1 ml-5">
+					{ review.sender.id === getUserId() &&
+						<>
+							<Pressable onPress={handleUpdateReview}>
+								<MaterialCommunityIcons name="pencil" size={20} />
+							</Pressable>
+							<Pressable onPress={() => handleDeleteReview(review)}>
+								<MaterialCommunityIcons name="delete" size={20} />
+							</Pressable>
+						</>
+					}
 					<Text className="font-bold text-lg">{review.offer.job_title}</Text>
 					<Text>{review.grade}/5</Text>
 					<Text className="whitespace-pre-wrap">{review.message}</Text>

@@ -23,6 +23,7 @@ import AddOrModifyAvailability from "../page/form/availability/AddOrModifyAvaila
 import CreateReview from "../page/form/review/CreateReview";
 import LoadingSpinner from "../component/loading/LoadingSpinner";
 import AddOrModifyReference from "../page/form/reference/AddOrModifyReference";
+import UpdateReview from "../page/form/review/UpdateReview";
 
 
 const Tab = createBottomTabNavigator();
@@ -113,6 +114,13 @@ export default function Navigation() {
 					<Tab.Screen
 						name="CreateReview"
 						children={() => <CreateReview/>}
+						options={{
+							tabBarButton: () => null
+						}}
+					/>
+					<Tab.Screen
+						name="UpdateReview"
+						children={() => <UpdateReview/>}
 						options={{
 							tabBarButton: () => null
 						}}
