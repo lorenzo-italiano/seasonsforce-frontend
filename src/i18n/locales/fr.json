@@ -15,6 +15,7 @@
 	"forgot": "Mot de passe oublié ?"
   },
   "common": {
-	"language": "Français"
+	"language": "Français",
+	"select-language": "Sélectionnez votre langue"
   }
 }

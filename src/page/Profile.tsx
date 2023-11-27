@@ -3,7 +3,7 @@ import React, {useContext, useEffect, useState} from "react";
 import {logout} from "../auth/Auth";
 import {AuthContext} from "../context/AuthContext";
 import LanguageSelector from "../component/i18n/LanguageSelector";
-import defaultProfilePicture from "../../assets/images/default-profile-picture.png"
+import defaultProfilePicture from "../../assets/images/default-profile-picture.png";
 import useAskToDeleteUserAccount from "../rest/hook/user/useAskToDeleteUserAccount";
 import {useNavigation} from "@react-navigation/native";
 
@@ -13,7 +13,7 @@ const Profile = () => {
 
 	const [user, setUser] = useState(null)
 	const [userRole, setUserRole] = useState(null)
-	const [profilePicture, setProfilePicture] = useState(null)
+	// const [profilePicture, setProfilePicture ] = useState<string>(null)
 	const [toBeRemoved, setToBeRemoved] = useState(null)
 	const askToDelete = useAskToDeleteUserAccount(getValidToken)
 	const navigation = useNavigation()
@@ -21,7 +21,6 @@ const Profile = () => {
 	const getUserInfos = async () => {
 		const user = await getUserById()
 		console.log(user)
-		setProfilePicture(user.profilePictureUrl ?? defaultProfilePicture)
 		setToBeRemoved(user.toBeRemoved ?? false)
 		setUser(user)
 		setUserRole(getUserRole())
@@ -52,7 +51,12 @@ const Profile = () => {
     return(
         <SafeAreaView className="flex-1 items-center justify-center bg-white">
 			<ScrollView contentContainerStyle={{ alignItems: "center", justifyContent: "center", gap: 10, marginTop: 10}}>
-				<Image source={{uri: profilePicture}} style={{width: 200, height: 200}} />
+				{ user !== null && user.profilePictureUrl &&
+					<Image source={{uri: user.profilePictureUrl}} style={{width: 200, height: 200}} />
+				}
+				{ user !== null && user.profilePictureUrl === null &&
+					<Image source={defaultProfilePicture} style={{width: 200, height: 200}} />
+				}
 
 				{/*{ user.profilePictureUrl === null && <Image source={{uri: user.profilePictureUrl}} style={{width: 200, height: 200}} /> }`*/}
 

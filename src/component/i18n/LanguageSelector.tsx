@@ -1,20 +1,23 @@
-import {useTranslation} from "react-i18next";
 import {View, Text} from "react-native";
 import {Picker} from "@react-native-picker/picker";
+import {useContext, useState} from "react";
+import {I18nContext} from "../../context/I18nContext";
 
 const LanguageSelector = () => {
-	const { t, i18n } = useTranslation();
+	const { i18n, changeLanguage } = useContext(I18nContext);
 
-	const changeLanguage = (selectedLanguage) => {
-		i18n.changeLanguage(selectedLanguage);
-	};
+	const [selectedLanguage, setSelectedLanguage] = useState(i18n.locale);
 
 	return (
-		<View>
-			<Text>{t('common.language')}</Text>
+		<View className="w-full">
+			<Text className="font-bold text-lg">{i18n.t("common.select-language")}</Text>
 			<Picker
-				selectedValue={i18n.language}
-				onValueChange={(itemValue) => changeLanguage(itemValue)}
+				selectedValue={selectedLanguage}
+				onValueChange={(itemValue) => {
+					changeLanguage(itemValue)
+					setSelectedLanguage(itemValue)
+				}}
+				numberOfLines={1}
 			>
 				<Picker.Item label="Français" value="fr" />
 				<Picker.Item label="English" value="en" />

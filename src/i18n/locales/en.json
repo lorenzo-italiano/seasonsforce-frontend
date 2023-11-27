@@ -15,6 +15,7 @@
 	"forgot": "Forgot your password?"
   },
   "common": {
-	"language": "English"
+	"language": "English",
+	"select-language": "Select your language"
   }
 }

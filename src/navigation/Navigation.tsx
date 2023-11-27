@@ -22,6 +22,7 @@ import ProfilePage from "../page/detail/ProfilePage";
 import AddOrModifyAvailability from "../page/form/availability/AddOrModifyAvailability";
 import CreateReview from "../page/form/review/CreateReview";
 import LoadingSpinner from "../component/loading/LoadingSpinner";
+import AddOrModifyReference from "../page/form/reference/AddOrModifyReference";
 
 
 const Tab = createBottomTabNavigator();
@@ -152,6 +153,13 @@ export default function Navigation() {
 					<Tab.Screen
 						name="AddOrModifyAvailability"
 						children={() => <AddOrModifyAvailability />}
+						options={{
+							tabBarButton: () => null
+						}}
+					/>
+					<Tab.Screen
+						name="AddOrModifyReference"
+						children={() => <AddOrModifyReference />}
 						options={{
 							tabBarButton: () => null
 						}}

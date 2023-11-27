@@ -4,6 +4,7 @@ import {AuthContext} from "../../../context/AuthContext";
 import {Image, Pressable, Text, View} from "react-native";
 import defaultProfilePicture from "../../../../assets/images/default-profile-picture.png";
 import useAddRecruitedIdToOffer from "../../../rest/hook/offer/useAddRecruitedIdToOffer";
+import LoadingSpinner from "../../loading/LoadingSpinner";
 
 const OfferMatchingUserList = ( {offerId, companyId} ) => {
 
@@ -24,11 +25,11 @@ const OfferMatchingUserList = ( {offerId, companyId} ) => {
 	}
 
 	if (isLoading) {
-		return <div>Loading...</div>
+		return <LoadingSpinner />
 	}
 
 	if (isError) {
-		return <div>{error.message}</div>
+		return <Text>{error.message}</Text>
 	}
 
 	return (
@@ -41,7 +42,12 @@ const OfferMatchingUserList = ( {offerId, companyId} ) => {
 				{ data &&
 					data.map((user) => (
 						<View key={user.id} className="bg-accent-blue flex flex-col items-center justify-center p-5 border-accent-blue rounded-lg">
-							<Image className="mb-5" source={{uri: user.profilePictureUrl ?? defaultProfilePicture}} style={{width: 200, height: 200}} />
+							{ user.profilePictureUrl &&
+								<Image source={{uri: user.profilePictureUrl}} style={{width: 200, height: 200}} />
+							}
+							{ user.profilePictureUrl === null &&
+								<Image source={defaultProfilePicture} style={{width: 200, height: 200}} />
+							}
 							<Text>{user.firstName} {user.lastName}</Text>
 							<Text>{user.email}</Text>
 							<Text>{user.phone}</Text>

@@ -5,8 +5,10 @@ import Logo from "../../assets/logo.png"
 import React, {useContext} from "react";
 import {useNavigation} from "@react-navigation/native";
 import {AuthContext} from "../context/AuthContext";
-import {useTranslation} from "react-i18next";
+// import {useTranslation} from "react-i18next";
+// import { I18n } from "i18n-js";
 import TextInputForm from "../component/form/input/TextInputForm";
+import {I18nContext} from "../context/I18nContext";
 
 function Login() {
 	const { control, handleSubmit, formState: { errors }, setError } = useForm();
@@ -14,7 +16,9 @@ function Login() {
 
 	const navigation = useNavigation();
 
-	const { t } = useTranslation();
+	const { i18n } = useContext(I18nContext)
+
+	// const { t } = useTranslation();
 
 	const handleNavigateToRegister = () => {
 		navigation.navigate('Register');
@@ -58,36 +62,36 @@ function Login() {
 
 				<View className="flex-col items-center mb-10">
 					<Image source={Logo} className="w-40 h-40" />
-					<Text className="text-4xl font-bold">{t('login.title')}</Text>
+					<Text className="text-4xl font-bold">{i18n.t('login.title')}</Text>
 				</View>
 
-				<View className="flex-col w-2/5">
+				<View className="flex-col w-3/5">
 					<TextInputForm
-						label={t("login.fields.username.placeholder")}
+						label={i18n.t("login.fields.username.placeholder")}
 						name="email"
 						control={control}
-						rules={{ required: t("login.fields.username.required") }}
-						placeholder={t("login.fields.username.placeholder")}
+						rules={{ required: i18n.t("login.fields.username.required") }}
+						placeholder={i18n.t("login.fields.username.placeholder")}
 					/>
 
 					<TextInputForm
-						label={t("login.fields.password.placeholder")}
+						label={i18n.t("login.fields.password.placeholder")}
 						name="password"
 						control={control}
-						rules={{ required: t("login.fields.password.required") }}
-						placeholder={t("login.fields.password.placeholder")}
+						rules={{ required: i18n.t("login.fields.password.required") }}
+						placeholder={i18n.t("login.fields.password.placeholder")}
 						secureTextEntry
 					/>
 
 					<Pressable className="mb-5" onPress={handleNavigateToRegister}>
-						<Text className="text-sm text-accent-blue">{t("login.no-account")}</Text>
+						<Text className="text-sm text-accent-blue">{i18n.t("login.no-account")}</Text>
 					</Pressable>
 
 					<TouchableOpacity className="border-primary rounded-lg bg-primary p-2" onPress={handleSubmit(onSubmit)}>
 						<Text className="text-center text-background font-bold text-xl" >Se connecter</Text>
 					</TouchableOpacity>
 
-					<Text className="text-sm mt-2 text-accent-blue">{t("login.forgot")}</Text>
+					<Text className="text-sm mt-2 text-accent-blue">{i18n.t("login.forgot")}</Text>
 				</View>
 
 		</SafeAreaView>

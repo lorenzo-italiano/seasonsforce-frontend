@@ -1,11 +1,12 @@
 import React from 'react';
 import {Controller} from "react-hook-form";
-import {TextInput, Text} from "react-native";
+import {TextInput, Text, View} from "react-native";
 
 const TextInputForm = ({ label, name, control, rules, ...rest }) => {
 
 
 	return (
+		// <View className="flex flex-col items-center justify-center w-full">
 		<>
 			<Text className="font-bold text-lg">{label}</Text>
 			<Controller

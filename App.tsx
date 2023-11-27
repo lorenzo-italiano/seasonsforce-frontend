@@ -1,25 +1,10 @@
 import { NativeWindStyleSheet } from "nativewind";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
-import {NavigationContainer} from "@react-navigation/native";
-import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Conversation from "./src/page/Conversation";
-import Offer from "./src/page/Offer";
-import Profile from "./src/page/Profile";
-import Notification from "./src/page/Notification";
-import Home from "./src/page/Home";
-import {useContext, useEffect, useState} from "react";
-import Login from "./src/page/Login";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-// import {NavigationProvider} from "./src/NavigationProvider";
-import {createStackNavigator} from "@react-navigation/stack";
-import TabNavigator from "./src/TabNavigator";
-import Register from "./src/page/Register";
+import 'intl-pluralrules';
+import 'core-js';
 import AuthProvider, {AuthContext} from "./src/context/AuthContext";
 import Navigation from "./src/navigation/Navigation";
-import "./src/i18n/i18n";
+import I18nProvider from "./src/context/I18nContext";
 
 NativeWindStyleSheet.setOutput({
     default: "native",
@@ -50,9 +35,11 @@ export default function App() {
 
 	return (
 		<QueryClientProvider client={queryClient}>
-			<AuthProvider>
-				<Navigation />
-			</AuthProvider>
+			<I18nProvider>
+				<AuthProvider>
+					<Navigation />
+				</AuthProvider>
+			</I18nProvider>
 		</QueryClientProvider>
 	);
 }

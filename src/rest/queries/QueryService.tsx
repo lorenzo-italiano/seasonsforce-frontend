@@ -86,3 +86,19 @@ export async function deleteById(endpointUrl: String, getValidToken: () => Promi
 
 	return res.data;
 }
+
+export async function deleteByIdWithData(endpointUrl: String, data: Object, getValidToken: () => Promise<string>) {
+
+	let token: String = "Bearer " + await getValidToken()
+
+	const config = {
+		headers: {
+			Authorization: token,
+		},
+		data: data
+	}
+
+	const res = await axios.delete(endpointUrl, config);
+
+	return res.data;
+}

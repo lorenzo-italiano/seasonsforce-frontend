@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {Pressable, Text} from "react-native";
+import {Pressable, SafeAreaView, Text} from "react-native";
 import {Controller, useForm} from "react-hook-form";
 import TextInputForm from "../../../component/form/input/TextInputForm";
 import {Picker} from "@react-native-picker/picker";
@@ -26,8 +26,6 @@ const AddOrModifyAvailability = () => {
 		setCurrentUserId(getUserId())
 	})
 
-
-
 	const onSubmit = async (data) => {
 
 		const obj = {
@@ -49,7 +47,7 @@ const AddOrModifyAvailability = () => {
 	}
 
 	return (
-		<>
+		<SafeAreaView>
 			<Text>Form to add or modify availability</Text>
 
 			<TextInputForm
@@ -126,7 +124,7 @@ const AddOrModifyAvailability = () => {
 					</Pressable>
 				</>
 			}
-		</>
+		</SafeAreaView>
 	)
 }
 
