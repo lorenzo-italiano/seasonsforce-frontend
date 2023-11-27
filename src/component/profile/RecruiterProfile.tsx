@@ -1,13 +1,14 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {Image, ScrollView, Text, View} from "react-native";
+import React, {useContext} from 'react';
+import {FlatList, Image, ScrollView, Text, View} from "react-native";
 import {useNavigation} from "@react-navigation/native";
 import {AuthContext} from "../../context/AuthContext";
 import useFetchDetailedUserById from "../../rest/hook/user/useFetchDetailedUserById";
 import LoadingSpinner from "../loading/LoadingSpinner";
 import defaultProfilePicture from "../../../assets/images/default-profile-picture.png";
 import useFetchAllReviewByRecruiterId from "../../rest/hook/review/useFetchAllReviewByRecruiterId";
-import ReviewCard from "../card/ReviewCard";
 import ReviewList from "../list/ReviewList";
+import useFetchOfferListByCreatorId from "../../rest/hook/offer/useFetchOfferListByCreatorId";
+import OfferCard from "../card/OfferCard";
 
 const RecruiterProfile = () => {
 
@@ -18,6 +19,8 @@ const RecruiterProfile = () => {
 	const { data, isError, error, isLoading } = useFetchDetailedUserById(getValidToken, getUserId())
 
 	const reviewList = useFetchAllReviewByRecruiterId(getUserId(), getValidToken)
+
+	const offerList = useFetchOfferListByCreatorId(getUserId(), getValidToken)
 
 	if(isLoading) {
 		return (
@@ -46,6 +49,26 @@ const RecruiterProfile = () => {
 					<Image source={defaultProfilePicture} style={{width: 200, height: 200}} />
 				}
 				<Text className="font-bold text-4xl mt-2">{capitalizeFirstLetter(data?.firstName)} {capitalizeFirstLetter(data?.lastName)}</Text>
+			</View>
+
+			<View className="w-full flex flex-col">
+				<View className="flex flex-row justify-between items-center w-full px-10">
+					<Text className="font-bold text-xl">Vos offres</Text>
+				</View>
+
+				<View className="w-full flex mt-2">
+					{ offerList.isLoading &&
+						<LoadingSpinner />
+					}
+
+					{ !offerList.isError && !offerList.isLoading &&
+						<FlatList
+							className="px-16"
+							data={offerList.data}
+							renderItem={({item}) => <OfferCard key={item.id} offer={item}/>}
+						/>
+					}
+				</View>
 			</View>
 
 			<View className="w-full flex flex-col px-10">
