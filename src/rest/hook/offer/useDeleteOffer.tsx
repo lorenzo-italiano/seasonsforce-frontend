@@ -9,8 +9,8 @@ export default function useDeleteOffer(getValidToken: () => Promise<string>) {
 	const [companyId, setCompanyId] = useState<string>(null)
 
 	return useMutation<String, Error, Object>({
-		mutationFn: async (offer: Offer) => {
-			setCompanyId(offer.companyId)
+		mutationFn: async (offer) => {
+			setCompanyId(offer.company.id)
 			return await deleteById("http://localhost:8090/api/v1/offer/" + offer.id, getValidToken);
 		},
 		onSuccess: async (data) => {
