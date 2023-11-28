@@ -35,23 +35,28 @@ const AdminPanel = () => {
 
 	return (
 		<SafeAreaView className="w-screen">
-			<ScrollView contentContainerStyle={{ display: "flex", alignItems: "center", justifyContent: "center", marginTop: 10, gap: 10, width: "100%"}}>
-				<Pressable className="items-start justify-start" onPress={() => navigation.navigate("Profile")}>
+			<ScrollView contentContainerStyle={{ display: "flex", justifyContent: "center", marginTop: 10, gap: 10, width: "100%"}}>
+				<Pressable className="flex w-full items-start justify-start px-5" onPress={() => navigation.navigate("Profile")}>
 					<FontAwesome name="arrow-left" size={32}/>
 				</Pressable>
-				<Text>Admin Panel</Text>
 
-				<Text>Users to be removed</Text>
-				{data.map((user) => {
-					return (
-						<View key={user.id}>
-							<Text>{user.email}</Text>
-							<Pressable className="border-primary rounded-lg bg-primary p-2" onPress={() => handleDeleteUser(user.id)}>
-								<Text className="text-center text-background font-bold">Supprimer</Text>
-							</Pressable>
-						</View>
-					)
-				})}
+				<Text className="font-bold text-3xl px-5">Panneau d'administration</Text>
+
+				<Text className="text-lg px-5">Demandes de suppressions de comptes</Text>
+
+				<View className="flex flex-col mx-5">
+					{data.map((user) => {
+						return (
+							<View className="flex flex-row items-center justify-between border-2 border-primary rounded-lg p-1" key={user.id}>
+								<Text className="ml-2">{user.email}</Text>
+								<Pressable className="border-primary rounded-lg bg-primary p-2" onPress={() => handleDeleteUser(user.id)}>
+									<Text className="text-center text-background font-bold">Supprimer</Text>
+								</Pressable>
+							</View>
+						)
+					})}
+				</View>
+
 			</ScrollView>
 		</SafeAreaView>
 	)
