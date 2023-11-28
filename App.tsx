@@ -2,9 +2,11 @@ import { NativeWindStyleSheet } from "nativewind";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import 'intl-pluralrules';
 import 'core-js';
-import AuthProvider, {AuthContext} from "./src/context/AuthContext";
+import AuthProvider from "./src/context/AuthContext";
 import Navigation from "./src/navigation/Navigation";
 import I18nProvider from "./src/context/I18nContext";
+import Toast from "react-native-toast-message";
+import React from "react";
 
 NativeWindStyleSheet.setOutput({
     default: "native",
@@ -38,6 +40,7 @@ export default function App() {
 			<I18nProvider>
 				<AuthProvider>
 					<Navigation />
+					<Toast />
 				</AuthProvider>
 			</I18nProvider>
 		</QueryClientProvider>

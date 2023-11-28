@@ -1,10 +1,10 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {FlatList, Text, View} from "react-native";
+import {FlatList} from "react-native";
 import {AuthContext} from "../../../context/AuthContext";
-import useFetchOfferList from "../../../rest/hook/offer/useFetchOfferList";
 import OfferCard from "../../card/OfferCard";
 import useFetchCompanyOfferList from "../../../rest/hook/offer/useFetchCompanyOfferList";
 import LoadingSpinner from "../../loading/LoadingSpinner";
+import ErrorMessage from "../../error/Error"
 
 const RecruiterOfferList = () => {
 
@@ -30,7 +30,7 @@ const RecruiterOfferList = () => {
 
 	if (isError) {
 		return (
-			<Text>Error</Text>
+			<ErrorMessage message={"Une erreur est survenue !"}></ErrorMessage>
 		)
 	}
 

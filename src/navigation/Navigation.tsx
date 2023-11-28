@@ -13,7 +13,7 @@ import {createStackNavigator} from "@react-navigation/stack";
 import {AuthContext} from "../context/AuthContext";
 import Register from "../page/Register";
 import Login from "../page/Login";
-import {Pressable, Text, View} from "react-native";
+import {Pressable, Text} from "react-native";
 import RegisterSpecificStep from "../component/registerform/RegisterSpecificStep";
 import CreateOrUpdateOfferForm from "../page/form/offer/CreateOrUpdateOfferForm";
 import OfferDetail from "../page/detail/OfferDetail";
@@ -25,13 +25,12 @@ import LoadingSpinner from "../component/loading/LoadingSpinner";
 import AddOrModifyReference from "../page/form/reference/AddOrModifyReference";
 import UpdateReview from "../page/form/review/UpdateReview";
 
-
 const Tab = createBottomTabNavigator();
 
 const Stack = createStackNavigator();
 
 export default function Navigation() {
-	const { isUserAuthenticated, isRegistered, userToken, getUserRole, logout } = useContext(AuthContext);
+	const {isUserAuthenticated, isRegistered, userToken, getUserRole, logout } = useContext(AuthContext);
 	const [isRegisteredVal, setIsRegisteredVal] = useState(false);
 	const [isLoading, setIsLoading] = useState<boolean>(false)
 
@@ -65,7 +64,7 @@ export default function Navigation() {
 				<Tab.Navigator
 					screenOptions={{
 						//TODO mettre une couleur de la palette
-						tabBarActiveTintColor: '#a83232',
+						tabBarActiveTintColor: '#0D3B66',
 						headerShown: false,
 					}}
 					initialRouteName="Home"

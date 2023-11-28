@@ -5,12 +5,13 @@ import {Image, Pressable, Text, View} from "react-native";
 import defaultProfilePicture from "../../../../assets/images/default-profile-picture.png";
 import useAddRecruitedIdToOffer from "../../../rest/hook/offer/useAddRecruitedIdToOffer";
 import LoadingSpinner from "../../loading/LoadingSpinner";
+import ErrorMessage from "../../error/Error";
 
 const OfferMatchingUserList = ( {offerId, companyId} ) => {
 
 	const { getValidToken } = useContext(AuthContext)
 
-	const { data, isLoading, isError, error } = useFetchMatchedUserForOffer(offerId, getValidToken)
+	const { data, isLoading, isError } = useFetchMatchedUserForOffer(offerId, getValidToken)
 
 	const addRecruitedIdToOffer = useAddRecruitedIdToOffer(getValidToken, companyId)
 
@@ -29,7 +30,7 @@ const OfferMatchingUserList = ( {offerId, companyId} ) => {
 	}
 
 	if (isError) {
-		return <Text>{error.message}</Text>
+		return <ErrorMessage message={"Une erreur est survenue !"}></ErrorMessage>
 	}
 
 	return (
