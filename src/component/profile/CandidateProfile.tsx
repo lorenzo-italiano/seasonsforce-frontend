@@ -10,6 +10,7 @@ import defaultProfilePicture from "../../../assets/images/default-profile-pictur
 import {formatIsoToSimpleDate} from "../../utils/DateHelper";
 import useRemoveReferenceToUser from "../../rest/hook/reference/useRemoveReferenceToUser";
 import ReviewList from "../list/ReviewList";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
 const CandidateProfile = () => {
 
@@ -49,7 +50,10 @@ const CandidateProfile = () => {
 	return (
 		<ScrollView className="flex-1 w-full">
 			<View className="absolute top-0 left-0 w-screen h-56 bg-accent-blue" />
-			<View className="flex flex-col w-full items-center mt-20">
+			<Pressable className="w-screen flex items-end justify-end mt-1 mr-5" onPress={() => navigation.navigate("UserSettings")}>
+				<MaterialIcons name="settings" size={32} />
+			</Pressable>
+			<View className="flex flex-col w-full items-center mt-14">
 				{/*<Image source={{uri: profilePicture}} style={{width: 250, height: 250}} />*/}
 				{ data?.profilePictureUrl &&
 					<Image source={{uri: user.profilePictureUrl}} style={{width: 200, height: 200}} />

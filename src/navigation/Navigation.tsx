@@ -24,6 +24,7 @@ import CreateReview from "../page/form/review/CreateReview";
 import LoadingSpinner from "../component/loading/LoadingSpinner";
 import AddOrModifyReference from "../page/form/reference/AddOrModifyReference";
 import UpdateReview from "../page/form/review/UpdateReview";
+import UserSettings from "../page/form/settings/UserSettings";
 
 const Tab = createBottomTabNavigator();
 
@@ -167,6 +168,13 @@ export default function Navigation() {
 					<Tab.Screen
 						name="AddOrModifyReference"
 						children={() => <AddOrModifyReference />}
+						options={{
+							tabBarButton: () => null
+						}}
+					/>
+					<Tab.Screen
+						name="UserSettings"
+						children={() => <UserSettings />}
 						options={{
 							tabBarButton: () => null
 						}}
