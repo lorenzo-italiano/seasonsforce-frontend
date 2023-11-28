@@ -140,7 +140,7 @@ const RegisterFormRecruiterStep = () => {
 						<View className="flex-row flex-wrap w-full my-10 items-center justify-center">
 							{ allPlan.data?.map((plan) => {
 								return(
-									<View className={`flex-col gap-y-2 mx-5 w-1/4 items-center justify-center border rounded-xl ${plan.id === selectedPlanId ? "bg-accent-orange border-accent-orange" : "border-gray-400"}`}>
+									<View className={`flex-col mx-5 my-2 items-center justify-center border rounded-xl ${plan.id === selectedPlanId ? "bg-accent-orange border-accent-orange" : "border-gray-400"}`}>
 										<Text className={`font-bold text-lg ${plan.id === selectedPlanId ? "text-background" : ""}`}>{plan.name}</Text>
 										<Text className={`px-5 ${plan.id === selectedPlanId ? "text-background" : ""}`}>{plan.description}</Text>
 										<Text className={`font-bold ${plan.id === selectedPlanId ? "text-background" : ""}`}>{plan.price} {plan.currency}</Text>

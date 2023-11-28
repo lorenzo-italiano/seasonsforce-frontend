@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {Pressable, Text} from "react-native";
+import {Pressable, SafeAreaView, Text, View} from "react-native";
 import {AuthContext} from "../../../context/AuthContext";
 import TextInputForm from "../../../component/form/input/TextInputForm";
 import {useForm} from "react-hook-form";
@@ -41,42 +41,45 @@ const UpdateReview = () => {
 	}
 
 	return (
-		<>
-			<Text>Form to update a review</Text>
+		<SafeAreaView>
 
-			<TextInputForm
-				label="Note"
-				name="grade"
-				control={control}
-				rules={{
-					required: "La note est requise",
-					pattern: {
-						value: /^[0-5]$/i,
-						message: 'La note doit être comprise entre 0 et 5',
-					}
-				}}
-				placeholder="Note"
-			/>
+			<View className="flex flex-col justify-center h-full px-10">
+				<Text className="font-bold text-3xl">Modification d'un avis</Text>
 
-			<TextInputForm
-				label="Message"
-				name="message"
-				control={control}
-				rules={{
-					required: "le message est requis",
-					// pattern: {
-					// 	value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-					// 	message: 'L\'e-mail n\'est pas valide',
-					// }
-				}}
-				placeholder="Message"
-			/>
+				<TextInputForm
+					label="Note"
+					name="grade"
+					control={control}
+					rules={{
+						required: "La note est requise",
+						pattern: {
+							value: /^[0-5]$/i,
+							message: 'La note doit être comprise entre 0 et 5',
+						}
+					}}
+					placeholder="Note"
+				/>
 
-			<Pressable onPress={handleSubmit(onSubmit)}>
-				<Text>Modifier</Text>
-			</Pressable>
+				<TextInputForm
+					label="Message"
+					name="message"
+					control={control}
+					rules={{
+						required: "le message est requis",
+						// pattern: {
+						// 	value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+						// 	message: 'L\'e-mail n\'est pas valide',
+						// }
+					}}
+					placeholder="Message"
+				/>
 
-		</>
+				<Pressable className="border-primary rounded-lg bg-primary p-2" onPress={handleSubmit(onSubmit)}>
+					<Text className="text-center text-background font-bold text-xl">Modifier</Text>
+				</Pressable>
+			</View>
+
+		</SafeAreaView>
 	)
 }
 
