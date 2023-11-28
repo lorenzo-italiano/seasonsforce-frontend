@@ -5,6 +5,7 @@ import {AuthContext} from "../context/AuthContext";
 import {useNavigation} from "@react-navigation/native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import useDeleteUser from "../rest/hook/user/useDeleteUser";
+import ErrorMessage from "../component/error/Error";
 
 const AdminPanel = () => {
 
@@ -19,7 +20,7 @@ const AdminPanel = () => {
 	}
 
 	if (isError) {
-		return (<Text>{error}</Text>)
+		return (<ErrorMessage message={error.message || "Une erreur est survenue !"}></ErrorMessage>)
 	}
 
 	const handleDeleteUser = async (id: string) => {

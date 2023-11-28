@@ -4,6 +4,7 @@ import { parseISO, format } from "date-fns";
 import {AuthContext} from "../../context/AuthContext";
 import LoadingSpinner from "../loading/LoadingSpinner";
 import useFetchAllNotificationByReceiverId from "../../rest/hook/notification/useFetchAllNotificationByReceiverId";
+import ErrorMessage from "../error/Error";
 
 const NotificationList = ({}) => {
 
@@ -24,7 +25,7 @@ const NotificationList = ({}) => {
 
     if (isError) {
         return (
-            <Text>Error</Text>
+            <ErrorMessage message={"Une erreur est survenue !"}></ErrorMessage>
         )
     }
 
