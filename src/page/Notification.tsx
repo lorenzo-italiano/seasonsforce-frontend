@@ -1,17 +1,13 @@
 import {SafeAreaView, Text} from "react-native";
-import Test from "../Test";
-import RecruiterList from "../component/RecruiterList";
-import {StatusBar} from "expo-status-bar";
-import useFetchRecruiterList from "../rest/hook/useFetchRecruiterList";
 import React from "react";
-import NotificationList from "../component/NotificationList";
+import NotificationList from "../component/list/NotificationList";
 
 const Notification = () => {
 
-    // const recruiterList = useFetchRecruiterList()
-
     return(
-        <SafeAreaView className="flex-1 w-screen h-screen items-center justify-center bg-white">
+        <SafeAreaView className="flex-1 w-screen h-screen justify-center bg-white p-6">
+            <Text className=" text-4xl font-bold my-5">Mes notifications</Text>
+			<NotificationList />
         </SafeAreaView>
     )
 }

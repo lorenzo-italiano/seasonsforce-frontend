@@ -9,7 +9,8 @@ module.exports = {
 		"background": "#FAF8F2",
 		"accent-blue": "#1B9AAA",
 		"accent-orange": "#FF6B35",
-		"error": "#FE3B11"
+		"error": "#FE3B11",
+		"light-gray": "#b9b9b9",
 	}
   },
   plugins: [],
