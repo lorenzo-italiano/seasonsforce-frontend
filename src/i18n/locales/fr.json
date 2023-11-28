@@ -12,7 +12,8 @@
 	  }
 	},
 	"no-account": "Pas de compte ? Inscrivez-vous !",
-	"forgot": "Mot de passe oublié ?"
+	"forgot": "Mot de passe oublié ?",
+	"submit": "Connexion"
   },
   "common": {
 	"language": "Français",

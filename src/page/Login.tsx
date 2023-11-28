@@ -91,7 +91,7 @@ function Login() {
 					</Pressable>
 
 					<TouchableOpacity className="border-primary rounded-lg bg-primary p-2" onPress={handleSubmit(onSubmit)}>
-						<Text className="text-center text-background font-bold text-xl" >Se connecter</Text>
+						<Text className="text-center text-background font-bold text-xl" >{i18n.t("login.submit")}</Text>
 					</TouchableOpacity>
 
 					<Text className="text-sm mt-2 text-accent-blue">{i18n.t("login.forgot")}</Text>

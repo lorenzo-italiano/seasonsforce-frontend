@@ -12,7 +12,8 @@
 	  }
 	},
 	"no-account": "No account? Register here!",
-	"forgot": "Forgot your password?"
+	"forgot": "Forgot your password?",
+	"submit": "Login"
   },
   "common": {
 	"language": "English",
