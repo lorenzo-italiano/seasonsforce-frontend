@@ -79,24 +79,29 @@ export default function Navigation() {
 							),
 						}}
 					/>
-					<Tab.Screen
-						name="Messages"
-						component={Conversation}
-						options={{
-							tabBarIcon: ({color, size}) => (
-								<MaterialCommunityIcons name="message" color={color} size={size}/>
-							),
-						}}
-					/>
-					<Tab.Screen
-						name="Offer"
-						component={Offer}
-						options={{
-							tabBarIcon: ({color, size}) => (
-								<MaterialIcons name="work" color={color} size={size}/>
-							),
-						}}
-					/>
+					{getUserRole() !== "admin" &&
+						<Tab.Screen
+							name="Messages"
+							component={Conversation}
+							options={{
+								tabBarIcon: ({color, size}) => (
+									<MaterialCommunityIcons name="message" color={color} size={size}/>
+								),
+							}}
+						/>
+					}
+					{ getUserRole() !== "candidate" &&
+						<Tab.Screen
+							name="Offer"
+							component={Offer}
+							options={{
+								tabBarIcon: ({color, size}) => (
+									<MaterialIcons name="work" color={color} size={size}/>
+								),
+							}}
+						/>
+					}
+
 					<Tab.Screen
 						name="OfferDetail"
 						children={() => <OfferDetail />}
@@ -125,15 +130,17 @@ export default function Navigation() {
 							tabBarButton: () => null
 						}}
 					/>
-					<Tab.Screen
-						name="Notifications"
-						component={Notification}
-						options={{
-							tabBarIcon: ({color, size}) => (
-								<MaterialCommunityIcons name="bell" color={color} size={size}/>
-							),
-						}}
-					/>
+					{ getUserRole() !== "admin" &&
+						<Tab.Screen
+							name="Notifications"
+							component={Notification}
+							options={{
+								tabBarIcon: ({color, size}) => (
+									<MaterialCommunityIcons name="bell" color={color} size={size}/>
+								),
+							}}
+						/>
+					}
 					<Tab.Screen
 						name="Profile"
 						children={() => <Profile/>}
@@ -144,13 +151,17 @@ export default function Navigation() {
 							),
 						}}
 					/>
-					<Tab.Screen
-						name="AdminPanel"
-						children={() => <AdminPanel />}
-						options={{
-							tabBarButton: () => null
-						}}
-					/>
+					{getUserRole() === "admin" &&
+						<Tab.Screen
+							name="AdminPanel"
+							children={() => <AdminPanel/>}
+							options={{
+								tabBarIcon: ({color, size}) => (
+									<MaterialIcons name="admin-panel-settings" color={color} size={size}/>
+								),
+							}}
+						/>
+					}
 					<Tab.Screen
 						name="ProfilePage"
 						children={() => <ProfilePage />}
