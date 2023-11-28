@@ -28,7 +28,7 @@ const AdminPanel = () => {
 			await deleteUser.mutateAsync(id)
 		}
 		catch (e) {
-			console.error(e)
+			// console.error(e)
 			return
 		}
 	}

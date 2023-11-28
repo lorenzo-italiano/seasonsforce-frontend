@@ -45,7 +45,6 @@ const CreateOrUpdateOfferForm = () => {
 
 	useEffect(() => {
 		if (params.initialValues !== undefined) {
-			console.log(params.initialValues)
 
 			setValue("job_title", params.initialValues.job_title)
 			setValue("job_description", params.initialValues.job_description)
@@ -100,8 +99,6 @@ const CreateOrUpdateOfferForm = () => {
 				"startDate": formatDateToISO(data.startDate) ?? "",
 				"endDate": formatDateToISO(data.endDate) ?? ""
 			}
-			console.log("to update")
-			console.log(obj)
 
 			try{
 				const res = await updateOffer.mutateAsync(obj)
@@ -113,7 +110,7 @@ const CreateOrUpdateOfferForm = () => {
 				navigation.navigate("Offer")
 			}
 			catch (e) {
-				console.error(e)
+				// console.error(e)
 				return
 			}
 		}
@@ -141,8 +138,6 @@ const CreateOrUpdateOfferForm = () => {
 				"endDate": formatDateToISO(data.endDate) ?? ""
 			}
 
-			console.log(obj)
-
 			try{
 				const res = await createOffer.mutateAsync(obj)
 				reset()
@@ -153,7 +148,7 @@ const CreateOrUpdateOfferForm = () => {
 				navigation.navigate("Offer")
 			}
 			catch (e) {
-				console.error(e)
+				// console.error(e)
 				return
 			}
 		}

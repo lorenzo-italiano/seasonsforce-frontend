@@ -38,7 +38,6 @@ function Register() {
 
 		if (data.password !== data.confirmPassword) {
 			if (firstStepRef.current) {
-				console.log("here")
 				firstStepRef.current.setError('password', {
 					type: 'manual',
 					message: 'Les mots de passe doivent être identiques !',
@@ -91,15 +90,13 @@ function Register() {
 				// const resp = await axios.post("http://localhost:8090/api/v1/user/auth/register", obj, config);
 				const resp = await registerUser.mutateAsync(obj)
 
-				console.log("Réponse réussie : ", resp);
-
 				if (resp.access_token && resp.refresh_token) {
 					setUserToken(resp.access_token)
 					setRefreshToken(resp.refresh_token)
 				}
 
 			} catch (error) {
-				console.error("Erreur lors de la requête")
+				// console.error("Erreur lors de la requête")
 				return
 			}
 		}

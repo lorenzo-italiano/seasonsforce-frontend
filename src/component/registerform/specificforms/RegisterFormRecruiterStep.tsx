@@ -46,7 +46,7 @@ const RegisterFormRecruiterStep = () => {
 			patchUser.mutate(param)
 		}
 		catch (error) {
-			console.error("une erreur s'est produite lors de l'inscription de l'utilisateur")
+			// console.error("une erreur s'est produite lors de l'inscription de l'utilisateur")
 			return
 		}
 
@@ -64,7 +64,6 @@ const RegisterFormRecruiterStep = () => {
 	})
 
 	useEffect(() => {
-		console.log(addressList.data)
 	}, [addressList])
 
 	if (allPlan.isLoading) {

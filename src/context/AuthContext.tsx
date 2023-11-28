@@ -58,7 +58,8 @@ const AuthProvider: React.FC<React.ReactNode> = ({ children }) => {
 			await AsyncStorage.setItem("authToken", newUserToken);
 			setUserToken(newUserToken);
 		} catch (error) {
-			console.error('Erreur lors de la mise à jour de l\'état du User Token et du stockage dans AsyncStorage', error);
+			// console.error('Erreur lors de la mise à jour de l\'état du User Token et du stockage dans AsyncStorage', error);
+			return
 		}
 	}
 
@@ -67,7 +68,8 @@ const AuthProvider: React.FC<React.ReactNode> = ({ children }) => {
 			await AsyncStorage.setItem("refreshToken", newRefreshToken);
 			setRefreshToken(newRefreshToken);
 		} catch (error) {
-			console.error('Erreur lors de la mise à jour de l\'état du Refresh Token et du stockage dans AsyncStorage', error);
+			// console.error('Erreur lors de la mise à jour de l\'état du Refresh Token et du stockage dans AsyncStorage', error);
+			return
 		}
 	}
 
@@ -86,8 +88,6 @@ const AuthProvider: React.FC<React.ReactNode> = ({ children }) => {
 			}
 			const resp = await axios.post("http://localhost:8090/api/v1/user/logout/" + decodedToken.sub, body, config)
 
-			// console.log(resp.data)
-
 			await AsyncStorage.removeItem('authToken');
 			setUserToken(null)
 
@@ -95,7 +95,7 @@ const AuthProvider: React.FC<React.ReactNode> = ({ children }) => {
 			setRefreshToken(null)
 
 		} catch (error) {
-			console.error('Erreur lors de la déconnexion : ', error);
+			// console.error('Erreur lors de la déconnexion : ', error);
 
 			await AsyncStorage.removeItem('authToken');
 			setUserToken(null)
@@ -122,7 +122,8 @@ const AuthProvider: React.FC<React.ReactNode> = ({ children }) => {
 			const resp = await axios.get("http://localhost:8090/api/v1/user/" + decodedToken.sub, config)
 			return resp.data
 		} catch (error) {
-			console.error('Erreur lors de la récupération du User : ', error);
+			// console.error('Erreur lors de la récupération du User : ', error);
+			return
 		}
 	}
 
@@ -132,7 +133,6 @@ const AuthProvider: React.FC<React.ReactNode> = ({ children }) => {
 		}
 
 		const decodedToken = jwtDecode(userToken?.toString(), {body: true})
-		// console.log(decodedToken)
 
 		const config = {
 			headers: {
@@ -141,10 +141,6 @@ const AuthProvider: React.FC<React.ReactNode> = ({ children }) => {
 		}
 
 		const resp = await axios.get("http://localhost:8090/api/v1/user/" + decodedToken.sub, config)
-		// console.log(resp.data.isRegistered)
-		// const user = await getUserById()
-
-		// console.log("AuthContext isRegistered ? " + resp.data.isRegistered)
 
 		if (getUserRole() === "admin") {
 			return true

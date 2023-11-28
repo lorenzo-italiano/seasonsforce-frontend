@@ -246,7 +246,7 @@ const RegisterFormCandidateStep = () => {
 			logout()
 		}
 		catch (error) {
-			console.error(error);
+			// console.error(error);
 			return
 		}
 

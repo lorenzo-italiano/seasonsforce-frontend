@@ -20,7 +20,6 @@ const Profile = () => {
 
 	const getUserInfos = async () => {
 		const user = await getUserById()
-		console.log(user)
 		setToBeRemoved(user.toBeRemoved ?? false)
 		setUser(user)
 		setUserRole(getUserRole())
@@ -36,7 +35,7 @@ const Profile = () => {
 			await getUserInfos()
 		}
 		catch (e) {
-			console.error(e)
+			// console.error(e)
 			return
 		}
 	}

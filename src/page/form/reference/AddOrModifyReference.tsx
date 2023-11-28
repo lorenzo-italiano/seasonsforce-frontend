@@ -28,10 +28,6 @@ const AddOrModifyReference = () => {
 		setCurrentUserId(getUserId())
 	})
 
-	useEffect(() => {
-		console.log(selectedRecruiter)
-	}, [selectedRecruiter])
-
 	const handleSearchContact = async () => {
 		const firstname = getValues("firstname")
 		const lastname = getValues("lastname")
@@ -40,7 +36,6 @@ const AddOrModifyReference = () => {
 			try {
 				const resp = await userByFirstnameLastname.searchByFirstname.mutateAsync(firstname)
 				setResultList(resp)
-				console.log(resp)
 			}
 			catch (error) {
 				console.error(error.message)
@@ -52,7 +47,6 @@ const AddOrModifyReference = () => {
 			try {
 				const resp = await userByFirstnameLastname.searchByLastname.mutateAsync(lastname)
 				setResultList(resp)
-				console.log(resp)
 			}
 			catch (error) {
 				console.error(error.message)
@@ -64,7 +58,6 @@ const AddOrModifyReference = () => {
 			try {
 				const resp = await userByFirstnameLastname.searchByFirstnameAndLastname.mutateAsync({firstname, lastname})
 				setResultList(resp)
-				console.log(resp)
 			}
 			catch (error) {
 				console.error(error.message)
@@ -82,17 +75,12 @@ const AddOrModifyReference = () => {
 			return
 		}
 
-		console.log(selectedRecruiter)
-		console.log(data)
-
 		const obj = {
 			"contact": selectedRecruiter.firstName + " " + selectedRecruiter.lastName,
 			"companyId": selectedRecruiter.company.id,
 			"contactId": selectedRecruiter.recruiterId,
 			"contactJobTitle": data.jobTitle
 		}
-
-		console.log(obj)
 
 		try {
 			await addReference.mutateAsync(obj)

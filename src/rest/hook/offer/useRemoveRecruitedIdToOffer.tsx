@@ -21,7 +21,7 @@ export default function useRemoveRecruitedIdToOffer(getValidToken: () => Promise
 			return data
 		},
 		onError: async (error) => {
-			console.error(error)
+			// console.error(error)
 			setCompanyId(null)
 			setOfferId(null)
 		}
