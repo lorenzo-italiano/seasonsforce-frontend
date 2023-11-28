@@ -123,9 +123,9 @@ const OfferDetail = () => {
 
 				</View>
 
-				{ role === "recruiter" && offerObject.data.creatorId === userId &&
-					<Text className="text-center font-bold text-2xl">{offerObject.data.offer_status}</Text>
-				}
+				{/*{ role === "recruiter" && offerObject.data.creatorId === userId &&*/}
+				{/*	<Text className="text-center font-bold text-2xl">{offerObject.data.offer_status}</Text>*/}
+				{/*}*/}
 
 				<View className="flex flex-col items-center justify-start w-5/6 bg-accent-blue rounded-2xl p-4 gap-y-2">
 					<View className="flex flex-row items-center justify-between w-full">
