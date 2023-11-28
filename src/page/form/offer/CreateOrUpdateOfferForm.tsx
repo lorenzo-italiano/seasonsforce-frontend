@@ -173,9 +173,17 @@ const CreateOrUpdateOfferForm = () => {
 		<SafeAreaView className="flex flex-1 w-screen bg-background">
 			<ScrollView className="flex-col w-full h-full" contentContainerStyle={{alignItems: "center", justifyContent: "center"}}>
 				<View className="flex-col items-center justify-center w-screen bg-background">
-					<Pressable onPress={handleGoBack}>
+					<Pressable className="flex w-full items-start justify-start px-5 mb-5" onPress={handleGoBack}>
 						<FontAwesome name="arrow-left" size="32"/>
 					</Pressable>
+
+					{ params.isUpdate &&
+						<Text className="font-bold text-3xl mb-5">Modifier une offre</Text>
+					}
+
+					{ !params.isUpdate &&
+						<Text className="font-bold text-3xl mb-5">Créer une offre</Text>
+					}
 
 					<View className={`flex-col ${Platform.OS === "web" ? "w-2/5" : "w-5/6"}`}>
 
@@ -400,14 +408,14 @@ const CreateOrUpdateOfferForm = () => {
 						}
 
 						{ params.isUpdate &&
-							<Pressable onPress={handleSubmit(onSubmit)}>
-								<Text>Modifier</Text>
+							<Pressable className="border-primary rounded-lg bg-primary p-2" onPress={handleSubmit(onSubmit)}>
+								<Text className="text-center text-background font-bold text-xl">Modifier</Text>
 							</Pressable>
 						}
 
 						{ !params.isUpdate &&
-							<Pressable onPress={handleSubmit(onSubmit)}>
-								<Text>Créer</Text>
+							<Pressable className="border-primary rounded-lg bg-primary p-2" onPress={handleSubmit(onSubmit)}>
+								<Text className="text-center text-background font-bold text-xl">Créer</Text>
 							</Pressable>
 						}
 
