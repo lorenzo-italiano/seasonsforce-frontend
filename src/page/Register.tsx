@@ -72,9 +72,12 @@ function Register() {
 				},
 			};
 
+			const hash = require('object-hash');
+			const hashedPassword = hash.sha1(firstStepData.password);
+
 			const obj = {
 				"email": firstStepData.email,
-				"password": firstStepData.password,
+				"password": hashedPassword,
 				"phone": data.phone,
 				"gender": data.gender,
 				"firstName": data.firstName,

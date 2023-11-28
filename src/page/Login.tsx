@@ -2,7 +2,7 @@ import { View, Text, SafeAreaView, Image, Pressable, TouchableOpacity} from 'rea
 import { useForm } from 'react-hook-form';
 import axios from "axios";
 import Logo from "../../assets/logo.png"
-import React, {useContext} from "react";
+import React, {useContext, useEffect} from "react";
 import {useNavigation} from "@react-navigation/native";
 import {AuthContext} from "../context/AuthContext";
 // import {useTranslation} from "react-i18next";
@@ -33,9 +33,12 @@ function Login() {
 				},
 			};
 
+			const hash = require('object-hash');
+			const hashedPassword = hash.sha1(data.password);
+
 			let details = {
 				'username': data.email,
-				'password': data.password
+				'password': hashedPassword
 			};
 
 			const url = 'http://localhost:8090/api/v1/user/auth/login';

@@ -24,6 +24,7 @@
     "base-64": "^1.0.0",
     "cocoapods": "^0.0.0",
     "core-js": "^3.33.3",
+    "crypto-js": "^4.2.0",
     "expo": "~49.0.12",
     "expo-localization": "~14.3.0",
     "expo-splash-screen": "~0.20.5",
