@@ -1,0 +1,22 @@
+{
+  "login": {
+	"title": "Login",
+	"fields": {
+	  "username": {
+		"placeholder": "Username",
+		"required": "Username is required"
+	  },
+	  "password": {
+		"placeholder": "Password",
+		"required": "Password is required"
+	  }
+	},
+	"no-account": "No account? Register here!",
+	"forgot": "Forgot your password?",
+	"submit": "Login"
+  },
+  "common": {
+	"language": "English",
+	"select-language": "Select your language"
+  }
+}
