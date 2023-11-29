@@ -83,7 +83,7 @@ const CandidateProfile = () => {
 										await removeAvailability.mutateAsync({ id: availability.id})
 									}
 									catch (e) {
-										console.error(e)
+										// console.error(e)
 										return
 									}
 								}}>
@@ -160,7 +160,7 @@ const CandidateProfile = () => {
 											await removeReference.mutateAsync({ id: reference.id })
 										}
 										catch (e) {
-											console.error(e)
+											// console.error(e)
 											return
 										}
 									}} className="items-end">

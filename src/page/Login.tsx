@@ -48,7 +48,6 @@ function Login() {
 				await setUserToken(response.data.access_token)
 				await setRefreshToken(response.data.refresh_token)
 			} catch (error) {
-				console.log(error)
 				setError('password', {
 					type: 'manual',
 					message: 'Mot de passe ou Email incorrect !',
@@ -56,7 +55,8 @@ function Login() {
 			}
 
 		} catch (error) {
-			console.error('Erreur lors de la requête POST :', error);
+			// console.error('Erreur lors de la requête POST :', error);
+			return
 		}
 	};
 

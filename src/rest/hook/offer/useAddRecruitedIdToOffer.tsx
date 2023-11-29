@@ -26,7 +26,7 @@ export default function useAddRecruitedIdToOffer(getValidToken: () => Promise<st
 			return data
 		},
 		onError: async (error) => {
-			console.error(error)
+			// console.error(error)
 			setCompanyId(null)
 			setOfferId(null)
 		}

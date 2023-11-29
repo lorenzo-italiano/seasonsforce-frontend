@@ -1,7 +1,7 @@
 import {Pressable, SafeAreaView, Text, View} from "react-native";
 import React, {useContext, useEffect, useState} from "react";
 import {AuthContext} from "../context/AuthContext";
-import CandidateOfferList from "../component/list/offer/CandidateOfferList";
+import AdminOfferList from "../component/list/offer/AdminOfferList";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import RecruiterOfferList from "../component/list/offer/RecruiterOfferList";
 import {useNavigation} from "@react-navigation/native";
@@ -20,10 +20,10 @@ const Offer = () => {
     return(
         <SafeAreaView className="w-screen flex-1 flex bg-background">
 
-			{ role === "candidate" &&
+			{ role === "admin" &&
 				<>
 					<Text className="w-full px-16 text-4xl font-bold my-5">Offres d'emplois</Text>
-					<CandidateOfferList />
+					<AdminOfferList />
 				</>
 			}
 

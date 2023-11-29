@@ -65,7 +65,7 @@ const OfferDetail = () => {
 			navigation.navigate("Offer")
 		}
 		catch (e) {
-			console.error(e)
+			// console.error(e)
 			return
 		}
 
@@ -85,7 +85,7 @@ const OfferDetail = () => {
 			await removeRecruitedIdFromOffer.mutateAsync(offerObject.data.id)
 		}
 		catch (e) {
-			console.error(e)
+			// console.error(e)
 			return
 		}
 	}

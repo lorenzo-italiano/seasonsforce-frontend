@@ -20,7 +20,6 @@ const OfferMatchingUserList = ( {offerId, companyId} ) => {
 			await addRecruitedIdToOffer.mutateAsync({offerId: offerId, recruitedId: userId})
 		}
 		catch (error) {
-			console.error(error.message)
 			return
 		}
 	}
@@ -53,11 +52,7 @@ const OfferMatchingUserList = ( {offerId, companyId} ) => {
 							<Text>{user.email}</Text>
 							<Text>{user.phone}</Text>
 							<Pressable className="border-primary rounded-lg bg-primary p-2 mt-2" onPress={async () => {
-								console.log("trying to recruit")
-								console.log(user.id)
-								console.log(offerId)
 								await handleRecruit(user.id)
-								console.log("recruited")
 							}}>
 								<Text className="text-center text-background font-bold text-xl">Recruter</Text>
 							</Pressable>

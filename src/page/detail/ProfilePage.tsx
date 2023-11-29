@@ -16,7 +16,6 @@ const ProfilePage = () => {
 
 	const getUserInfos = async () => {
 		const user = await getUserById()
-		console.log(user)
 		setUser(user)
 		setUserRole(getUserRole())
 	}

@@ -41,7 +41,7 @@ const AddOrModifyAvailability = () => {
 			navigation.navigate("ProfilePage")
 		}
 		catch (error) {
-			console.error(error.message)
+			// console.error(error.message)
 			return
 		}
 	}

@@ -15,21 +15,10 @@ const Home = () => {
 
     const navigation = useNavigation();
 
-	useEffect(() => {
-		async function test() {
-			console.log("is registered ? " + await isRegistered())
-			console.log("is user authenticated ? " + isUserAuthenticated)
-		}
-
-		test()
-
-	}, [])
-
     useEffect(() => {
         if (!data) return;
         data.onmessage = (event) => {
             const notification: NotificationModel = JSON.parse(event.data);
-            console.log(notification);
             Toast.show({
                 type: 'info',
                 text1: notification.category,

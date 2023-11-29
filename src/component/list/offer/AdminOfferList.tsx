@@ -6,7 +6,7 @@ import OfferCard from "../../card/OfferCard";
 import LoadingSpinner from "../../loading/LoadingSpinner";
 import ErrorMessage from "../../error/Error";
 
-const CandidateOfferList = () => {
+const AdminOfferList = () => {
 
 	const { getValidToken } = useContext(AuthContext)
 
@@ -34,4 +34,4 @@ const CandidateOfferList = () => {
 
 }
 
-export default CandidateOfferList;
+export default AdminOfferList;

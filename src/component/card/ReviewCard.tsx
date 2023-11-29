@@ -47,7 +47,6 @@ const ReviewCard = ({review}) => {
 	}
 
 	const onSubmit = async (data) => {
-		console.log(data)
 		const obj = {
 			"message": data.message,
 			"senderId": getUserId()
